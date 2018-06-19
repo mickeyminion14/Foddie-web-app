@@ -15,32 +15,50 @@
       <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     </head>
 
-    <body ng-app="FirstApp">
+    <body ng-app="FirstApp" ng-controller="home">
 <header>
 
-<nav class=" amber " role="navigation">
+<nav class=" orange accent-4" role="navigation">
   <div class="nav-wrapper container">
-    <a href="#!dashboard" class="brand-logo"><i class="material-icons">dashboard</i>Minion</a>
+    <a href="#" class="brand-logo"><i class="material-icons">fastfood</i>Foodie</a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="#login"><i class=" material-icons  left">insert_emoticon</i>Log In</a></li>
-      <li><a href="#signup"><i class="material-icons left">group_add</i>Sign Up</a></li>
-      <li><a href="#profile"><i class="material-icons left">dvr</i>Pofile</a></li>
-      <li><a href="#orderguest"><i class="material-icons left">dvr</i>Order as a Guest</a></li>
+      <li ng-if="loggedIn=='false'"><a href="#login" ><i class=" material-icons  left">insert_emoticon</i>Log In</a></li>
+      <li ng-if="loggedIn=='false'"><a href="#signup"><i class="material-icons left">group_add</i>Create an Account</a></li>
+      <li ng-if="loggedIn=='true'"><a href="#profile"><i class="material-icons left">dvr</i>Pofile</a></li>
+      <li ng-if="loggedIn=='false'"><a href="#orderguest"><i class="material-icons left">dvr</i>Order as a Guest</a></li>
   
       
     </ul>
   </div>
 </nav>
-
+<ul id="nav-mobile" class="sidenav sidenav-fixed" >
+  <li><div class="user-view">
+    <div class="background">
+      <img src="images/office.jpg">
+    </div>
+    <a href="#user"><img class="circle" src="images/yuna.jpg"></a>
+    <a href="#name"><span class="white-text name">John Doe</span></a>
+    <a href="#email"><span class="white-text email">jdandturk@gmail.com</span></a>
+  </div></li>
+  <li><a href="#!"><i class="material-icons">cloud</i>First Link With Icon</a></li>
+  <li><a href="#!">Second Link</a></li>
+  <li><div class="divider"></div></li>
+  <li><a class="subheader">Subheader</a></li>
+  <li><a class="waves-effect" href="#!">Third Link With Waves</a></li>
+</ul>
+<a href="#" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
 </header>
  <main>
 
 <div ng-view></div>
+<div> some output
+</div>
+<div>{{loggedIn}}</div>
 </main>
 
- <footer class="page-footer  amber darken-2" style="">
+ <footer class="page-footer orange accent-4" >
           <div class="container">
-            <div class="row ">
+            <div class="row ">/#/orderguest
               <div class="col l6 s12">
                 <h5 class="white-text">Footer Content</h5>
                 <p class="grey-text text-lighten-4">You can use rows and columns here to organize your footer content.</p>
@@ -65,8 +83,6 @@
         </footer>
     
       <script type="text/javascript" src="js/materialize.min.js"></script>
-      <script type="text/javascript" src="./js/route.js" >
- 
-      </script>
+      <script type="text/javascript" src="./js/route.js" ></script>
     </body>
   </html>

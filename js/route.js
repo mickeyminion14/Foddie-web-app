@@ -4,7 +4,7 @@
         $routeProvider
           .when("/login",{
             templateUrl:"./views/login.html",
-            controller :"emp"
+            controller :"login"
         })
           .when("/signup",{
             templateUrl :"./views/signup.html",
@@ -13,12 +13,15 @@
             templateUrl :"./views/dashboard.html",
             controller :"emp1"  
         })  .when("/profile",{
-            templateUrl :"./views/profile.html",
-            controller :"emp1"
-        })
+          templateUrl :"./views/profile.html",
+          controller :"emp1"
+        }) .when("",{
+        templateUrl :"./views/login.html",
+        controller :"emp"
+    })
       });
 
-    app.controller("emp",function ($rootScope,$location) {
+    app.controller("login",function ($rootScope,$location) {
       
       $rootScope.username="";
        $rootScope.password="";
@@ -28,6 +31,8 @@
         if(username=='user1'&&password=="password"){
          M.toast({html: 'LOGGED IN SUCCESSFULLY !'})
         $location.path('/profile');
+        $rootScope.loggedIn='true';
+     
         }
        else{
           M.toast({html: ' PASSWORD OR USERNAME INCORRECT '})
@@ -39,12 +44,22 @@
       });
      app.controller("emp1",function ($rootScope) {
       
-      $rootScope.first_name;
+    
       });
-      app.controller("emp2",function ($rootScope) {
-      
-      $rootScope.first_name;
+      app.controller("home",function ($rootScope) {
+        $rootScope.loggedIn='false';
+    
       });
+
+     
+
+
+
+
+
+
+
+
  // var app=angular.module("FirstApp",["ui.router"]);
  //      app.config(function($stateProvider,$urlRouterProvider){
  //        $urlRouterProvider.when("","/Dashboard");
