@@ -16,9 +16,13 @@
           templateUrl :"./views/profile.html",
           controller :"emp1"
         }) .when("",{
-        templateUrl :"./views/login.html",
-        controller :"emp"
-    })
+          templateUrl :"./views/login.html",
+          controller :"emp"
+      })
+        .when("/northIndian",{
+          templateUrl :"./views/cuisines/northIndian.html",
+          controller :"emp"
+      })
       });
 
     app.controller("login",function ($rootScope,$location) {
