@@ -17,11 +17,11 @@
           controller :"emp1"
         }) .when("",{
           templateUrl :"./views/login.html",
-          controller :"emp"
+          controller :"emp1"
       })
         .when("/northIndian",{
           templateUrl :"./views/cuisines/northIndian.html",
-          controller :"emp"
+          controller :"northIndian"
       })
       });
 
@@ -46,8 +46,30 @@
 }
 
       });
-     app.controller("emp1",function ($rootScope) {
+     app.controller("northIndian",function ($rootScope,$scope) {
+       $scope.details=
+       [  {quantity:"Quarter", price:60},
+          {quantity:"Half", price:80},
+          {quantity:"Full", price:140}
       
+      ];
+
+
+      $scope.selectedQuantity="";
+      $scope.selectedQuantity1=""; 
+      // console.log( $scope.selectedQuantity);
+      $('select').formSelect();
+      // var instance = M.FormSelect.getInstance(elem);
+      
+
+      $scope.addToCart=function(){
+          M.toast({html: 'button clicked'});
+          // console.log( $scope.selectedQuantity);
+      };
+
+     
+    
+       
     
       });
       app.controller("home",function ($rootScope) {
