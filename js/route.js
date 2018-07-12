@@ -47,24 +47,41 @@
 
       });
      app.controller("northIndian",function ($rootScope,$scope) {
-       $scope.details=
+      $('select').formSelect(); 
+      $scope.item1;
+      $scope.selectedItem="";
+      $scope.selectedItem1=""; 
+      $rootScope.cartObj=[];
+
+      $scope.itemsArr=
+      [
+        {item_id:"item1" ,item_name: "Paneer Butter Masala", item_img: "./images/cuisines/northIndian/pbm.jpg"}, 
+        {item_id:"item2" ,item_name: "Paneer Tikka Masala", item_img: "./images/cuisines/northIndian/ptm.jpg"}, 
+        {item_id:"item3" ,item_name: "Paneer Lababdar", item_img: "./images/cuisines/northIndian/pld.jpg"},
+        {item_id:"item4" ,item_name: "Malai Kofta", item_img: "./images/cuisines/northIndian/mkf.jpg"},
+        {item_id:"item5" ,item_name: "Mix Vegetable", item_img: "./images/cuisines/northIndian/mxv.jpg"},
+        {item_id:"item6" ,item_name: "Sev Tamatar", item_img: "./images/cuisines/northIndian/svt.JPG"}
+      ];
+
+
+      $scope.details=
        [  {quantity:"Quarter", price:60},
           {quantity:"Half", price:80},
           {quantity:"Full", price:140}
       
       ];
 
+   
+     
 
-      $scope.selectedQuantity="";
-      $scope.selectedQuantity1=""; 
-      // console.log( $scope.selectedQuantity);
-      $('select').formSelect();
-      // var instance = M.FormSelect.getInstance(elem);
-      
-
-      $scope.addToCart=function(){
+      $scope.addToCart=function(obj){
           M.toast({html: 'button clicked'});
-          // console.log( $scope.selectedQuantity);
+        //  item1 = document.getElementById("item1").innerHTML;
+        //  obj.item=item1;
+          console.log(obj);
+          // $scope.cartObj.push(obj);
+          // console.log($scope.cartObj)
+          
       };
 
      
@@ -72,6 +89,10 @@
        
     
       });
+
+
+
+
       app.controller("home",function ($rootScope) {
         $rootScope.loggedIn='false';
     

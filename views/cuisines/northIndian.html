@@ -1,50 +1,32 @@
 <div class="container" style="margin-top: 30px">
     <div class="row">
+        <div ng-repeat="item in itemsArr">
         <div class="col s8 offset-s2 m6 l3">
             <div class="card">
                 <div class="card-image">
-                    <img src="../../images/cuisines/northIndian/pbm.jpg" height="150" width="40">
+                    <img ng-src="{{item.item_img}}" height="150" width="40">
                     <!-- <span class="card-title black-text">Card Title</span> -->
                 </div>
                 <div class="card-content">
-                    <h6> Paneer Butter Masala</h6>
+                    <h6 >{{item.item_name}}</h6>
                 </div>
                 <div class="card-action">
                         
                        
-                      Select Quantity :  <select  style="" class="browser-default"  ng-model="selectedQuantity" ng-options="x.quantity for x in details"></select>
-                        <a class="waves-effect waves-light btn valign" style="margin-left: 25px; margin-top: 10px;" ng-click="addToCart()">
+                      Select Quantity :  <select  style="" class="browser-default"  ng-model="item.item_id" ng-options="x.quantity for x in details">
+                          
+                      </select>
+                        <a class="waves-effect waves-light btn valign" style="margin-left: 25px; margin-top: 10px;" ng-click="addToCart(item)">
                             <i class="material-icons left">add_shopping_cart</i>Add To Cart</a>
                     </div>
             </div>
             
         </div>
-
-        <div class="col s8 offset-s2 m6 l3">
-                <div class="card">
-                    <div class="card-image">
-                        <img src="../../images/cuisines/northIndian/pbm.jpg" height="150" width="40">
-                        <!-- <span class="card-title black-text">Card Title</span> -->
-                    </div>
-                    <div class="card-content">
-                        <h6> Paneer Butter Masala</h6>
-                    </div>
-                    <div class="card-action">
-                            
-                           
-                            <select style="" class="browser-default"  ng-model="selectedQuantity1" ng-options="x.quantity for x in details"></select>
-                            <a class="waves-effect waves-light btn valign" style="margin-left: 25px; margin-top: 10px;" ng-click="addToCart()">
-                                <i class="material-icons left">add_shopping_cart</i>Add</a>
-                        </div>
-                </div>
-                
-            </div>
+        </div>
+       
             
-           Selected :{{selectedQuantity.quantity}}
+           Selected :{{}}
            
           
 </div>
 </div>
-<script>
-      $('select').formSelect();
-      </script>
