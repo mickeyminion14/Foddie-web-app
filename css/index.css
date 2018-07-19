@@ -6,16 +6,16 @@
 
   main {
     flex: 1 0 auto;
-    padding-left: 300px;
+    /* padding-left: 300px; */
   }
 
   footer {
   
-    padding-left: 300px;
+    /* padding-left: 300px; */
   }
 
   header {
-    padding-left: 200px;
+    /* padding-left: 200px; */
   }
 
 
@@ -36,5 +36,15 @@
   select:focus {
     outline: 1px solid #c9f3ef;
   }
+
+  .bgimg {
+    background-image: url('../images/sar.jpg');
+    /* background-repeat: no-repeat; */
+}
+.cover {
+  background-color: #ffecb3;
+  /* background-repeat: no-repeat; */
+  
+}
 
   

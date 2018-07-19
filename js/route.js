@@ -8,16 +8,16 @@
         })
           .when("/signup",{
             templateUrl :"./views/signup.html",
-            controller :"emp1"
+            controller :"login"
         }).when("/dashboard",{
             templateUrl :"./views/dashboard.html",
             controller :"emp1"  
         })  .when("/profile",{
           templateUrl :"./views/profile.html",
-          controller :"emp1"
-        }) .when("",{
-          templateUrl :"./views/login.html",
-          controller :"emp1"
+          controller :"login"
+        }) .when("/",{
+          templateUrl :"./views/home.html",
+          controller :"home"
       })
         .when("/northIndian",{
           templateUrl :"./views/cuisines/northIndian.html",
@@ -75,13 +75,18 @@
      
 
       $scope.addToCart=function(obj){
-          M.toast({html: 'button clicked'});
-        //  item1 = document.getElementById("item1").innerHTML;
-        //  obj.item=item1;
-          console.log(obj);
-          // $scope.cartObj.push(obj);
-          // console.log($scope.cartObj)
-          
+
+        if(obj.item_id.quantity==null){
+          M.toast({html:'Please Select Quantity !'}); 
+        }
+        else{
+          M.toast({html: 'Item Added To Cart'});
+     
+          console.log(obj.item_id.price);
+
+          $scope.cartObj.push(obj);
+          console.log($scope.cartObj)
+        }
       };
 
      
@@ -94,6 +99,9 @@
 
 
       app.controller("home",function ($rootScope) {
+        $('.carousel.carousel-slider').carousel({
+          fullWidth: true
+        });
         $rootScope.loggedIn='false';
     
       });

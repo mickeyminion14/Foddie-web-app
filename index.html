@@ -20,9 +20,9 @@
 
 <nav class=" amber darken-1" role="navigation">
   <div class="nav-wrapper container ">
-      <a href="" data-target="slide-out" class="sidenav-trigger"><i class="material-icons">menu</i></a>
-     <a href="#" > <img src="images/steak.png"  height="60" width="60" style="margin-top: 2px;" ></a>
-    <a href="#"   class="brand-logo center" style="margin-right: 30px">Foodie</a>
+      <a href="" data-target="slide-out" class="sidenav-trigger show-on-large pulse"><i class="material-icons">menu</i></a>
+     <a href="!" > <img src="images/steak.png"  height="60" width="60" style="margin-top: 2px;" ></a>
+    <a href="!"   class="brand-logo center" style="margin-right: 30px">Foodie</a>
   
    <ul class="right show-on-medium-and-down hide-on-med-and-up">
      <li> 
@@ -53,26 +53,16 @@
     </ul>  
   </div>
 </nav>
-<ul id="slide-out" class="sidenav sidenav-fixed >
-    <li ng-if="loggedIn=='false'"><div class="user-view">
-      <div class="background amber ">
+<ul id="slide-out" class="sidenav">
+    <li><div class="user-view">
+      <div class="background ">
+        <img src="./images/cover_img.jpg" height="200" width="300">
       </div>
-      <a href="#user"><img class="circle materialboxed" src="images/profile.png"></a>
-      <a href="#name"><span class="black-text name">Demo profile</span></a>
-      <a href="#email"><span class="black-text email">demo@gmail.com</span></a>
+      <br><br><br>
     </div>   
     
   </li>
-  <li ng-if="loggedIn=='true'"><div class="user-view">
-    <div class=" background orange amber ">
-    </div>
-    <a href="#user"><img class="circle" src="images/profile.png"></a>
-    <a href="#name"><span class="black-text name">Sarthak Agrawal</span></a>
-    <a href="#email"><span class="black-text email">sarthakagrawal6@gmail.com</span></a>
-  
-  </div>
-  
-  </li>
+
     
     <li style="font-size: 40px; ">&nbsp;<img src="images/cuisine.png"  height="40" width="40" >&nbsp; Cuisine</li>
     <div class="divider"></div>
@@ -93,13 +83,14 @@
 
 </header>
 
- <main>
+ <main  class="bgimg">
+
+
+
 
 <div ng-view></div>
-<div> some output
-</div>
-<div>{{loggedIn}}</div>
-</main>div
+
+</main>
 
  <footer class="page-footer amber darken-1" >
           
