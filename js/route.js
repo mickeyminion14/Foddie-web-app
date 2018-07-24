@@ -162,8 +162,13 @@
     
       });
 
-      app.controller("cart",function ($rootScope) {
+      app.controller("cart",function ($rootScope, $scope) {
         $rootScope.cartObj;
+
+        $scope.increaseItemCount= function (item) {
+          console.log(item);
+          M.toast({html: 'Added'});
+        };
     
       });
 
