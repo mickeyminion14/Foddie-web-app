@@ -46,5 +46,17 @@
   /* background-repeat: no-repeat; */
   
 }
+.banner {
+  background-image: url('../images/cuisines/northIndian/loln.jpg');
+      /* Full height */
+      height: 50%; 
+
+      /* Center and scale the image nicely */
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+  /* background-repeat: no-repeat; */
+  
+}
 
   

@@ -20,9 +20,9 @@
 
 <nav class=" amber darken-1" role="navigation">
   <div class="nav-wrapper container ">
-      <a href="" data-target="slide-out" class="sidenav-trigger show-on-large pulse"><i class="material-icons">menu</i></a>
-     <a href="!" > <img src="images/steak.png"  height="60" width="60" style="margin-top: 2px;" ></a>
-    <a href="!"   class="brand-logo center" style="margin-right: 30px">Foodie</a>
+      <a href="" data-target="slide-out" class="sidenav-trigger show-on-large pulse tooltipped " data-position="bottom" data-tooltip="Menu"><i class="material-icons">menu</i></a>
+     <a href="##" > <img src="images/steak.png"  height="60" width="60" style="margin-top: 2px;" ></a>
+    <a href="##"   class="brand-logo center" style="margin-right: 30px">Foodie</a>
   
    <ul class="right show-on-medium-and-down hide-on-med-and-up">
      <li> 
@@ -31,10 +31,11 @@
       </a>
     </li></ul>
       <ul class="right hide-on-med-and-down"  >
-
+      
       <li ng-if="loggedIn=='false'"><a href="#login" ><i class=" material-icons  left">insert_emoticon</i>Log In</a></li>
       <li ng-if="loggedIn=='false'"><a href="#signup"><i class="material-icons left">group_add</i>Create an Account</a></li>
       <li ng-if="loggedIn=='true'"><a href="#profile"><i class="material-icons left">dvr</i>Pofile</a></li>
+      <li><a href="#cart" ><i class=" material-icons  left">shopping_cart</i>Cart</a></li>
       <!-- <li ng-if="loggedIn=='false'"><a href="#orderguest"><i class="material-icons left">dvr</i>Order as a Guest</a></li> -->
       
       
@@ -50,6 +51,7 @@
       <li ng-if="loggedIn=='false'" ><a href="#signup" style="font-size: 14px;"><i class="material-icons left">group_add</i>SignUp</a></li>
       <li ng-if="loggedIn=='true'"><a href="#profile"><i class="material-icons left">dvr</i>Pofile</a></li>
       <!-- <li ng-if="loggedIn=='false'"><a href="#orderguest"><i class="material-icons left">dvr</i>Order as a Guest</a></li> -->
+      <li><a href="#cart" ><i class=" material-icons  left">shopping_cart</i>Cart</a></li>
     </ul>  
   </div>
 </nav>
@@ -111,6 +113,8 @@
         $('select').formSelect();
         $('.dropdown-trigger').dropdown({hover:true,coverTrigger:false});
         $('.sidenav').sidenav();
+        $('.tooltipped').tooltip();
+        $('.parallax').parallax();
        });  
     </script>
     </body>
