@@ -16,8 +16,9 @@
             <td>{{item.item_name}}</td>
             <td>{{item.item_id.quantity}}</td>
             <td>x {{item.itemCount}}</td>
-            <td> {{item.subtotal}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a class="waves-effect waves-light circle btn-small" style="border-radius: 70%;" ng-click="increaseItemCount(item)"><i class=" material-icons small">add</i> </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="waves-effect waves-light circle btn-small" style="border-radius: 70%;"><i class=" material-icons small">remove</i></a></td>
+            <td> {{item.subtotal}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a class="waves-effect waves-light circle btn-small" style="border-radius: 70%;" ng-click="increaseItemCount(item)"><i class=" material-icons small">add</i> </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="waves-effect waves-light circle btn-small" style="border-radius: 70%;"  ng-click="decreaseItemCount(item)"><i class=" material-icons small">remove</i></a></td>
           </tr>
+         TOTAL: {{total}}
         </tbody>
       </table>
     </div>

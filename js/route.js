@@ -59,6 +59,20 @@
       $scope.selectedItem="";
       $scope.selectedItem1=""; 
       $rootScope.cartObj;
+      $rootScope.total;
+      
+      $scope.getTotal= function () {
+        $rootScope.total=0;
+
+        angular.forEach($rootScope.cartObj, function(value, key){
+
+              $rootScope.total=value.subtotal+$rootScope.total;
+
+        });
+
+          console.log("total is "+$rootScope.total);
+
+      };
 
       $scope.itemsGravyArr=
       [
@@ -124,6 +138,7 @@
                 if((value.item_name==obj.item_name)&&(value.item_id.quantity==obj.item_id.quantity)){
                   value.itemCount++;
                   value.subtotal=value.itemCount*value.item_id.price;
+                  $scope.getTotal();
                   $scope.found=1;
                 }
              
@@ -135,6 +150,8 @@
            else {
             obj.itemCount=1;
             obj.subtotal=obj.item_id.price;
+            $rootScope.total=$rootScope.total+obj.subtotal;
+            console.log("gadbad total"+$rootScope.total);
             $rootScope.cartObj.push(obj);
            }
                        
@@ -159,15 +176,71 @@
         });
         $rootScope.loggedIn='false';
         $rootScope.cartObj=[];
+        $rootScope.total=0;
     
       });
 
       app.controller("cart",function ($rootScope, $scope) {
         $rootScope.cartObj;
-
+        $scope.total;
         $scope.increaseItemCount= function (item) {
           console.log(item);
+
+          angular.forEach($rootScope.cartObj, function(value, key){
+
+            if((value.item_name==item.item_name)&&(value.item_id.quantity==item.item_id.quantity)) {
+              value.itemCount++;
+              
+              value.subtotal=value.itemCount*value.item_id.price;
+              $scope.getTotal();
+              // console.log(value.subtotal+"  item count");
+              // M.toast({html: 'increased'});
+            }
+
+            else {
+
+            }
+            
+          });
+
           M.toast({html: 'Added'});
+        };
+
+        $scope.decreaseItemCount= function (item) {
+          console.log(item);
+
+          angular.forEach($rootScope.cartObj, function(value, key){
+
+            if((value.item_name==item.item_name)&&(value.item_id.quantity==item.item_id.quantity)) {
+              value.itemCount--;
+              
+              value.subtotal=value.itemCount*value.item_id.price;
+              $scope.getTotal();
+              console.log(value.subtotal+"  item count");
+              // M.toast({html: 'increased'});
+            }
+
+            else {
+
+            }
+            
+          });
+          
+          M.toast({html: 'Removed'});
+        };
+
+
+        $scope.getTotal= function () {
+          $rootScope.total=0;
+
+          angular.forEach($rootScope.cartObj, function(value, key){
+
+                $rootScope.total=value.subtotal+$rootScope.total;
+
+          });
+
+            console.log("total is "+$rootScope.total);
+
         };
     
       });
