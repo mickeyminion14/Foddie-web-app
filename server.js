@@ -7,10 +7,10 @@ var app = express();
 
 app.use(bodyparser.urlencoded ({extended : false}));
 
-
+app.use(express.static('public'));
 app.get('/', function (req,res) {
 	
-	res.sendFile(path.resolve('./views/index.html'));
+	res.sendFile(path.resolve('./public/views/index.html'));
 });
 
 
