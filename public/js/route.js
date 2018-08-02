@@ -66,7 +66,38 @@
 
       });
 
-      app.controller("signup", function($rootScope,$scope){
+      app.controller("signup", function($rootScope,$scope,$http){
+        $scope.first_name;
+        $scope.last_name;
+        $scope.email;
+        $scope.mobile;
+        $scope.password;
+        $scope.confirm_password;
+
+        $scope.createUser=function () {
+          $scope.User={first_name:$scope.first_name,last_name: $scope.last_name,email: $scope.email, password:$scope.password};
+          $http.get("/createUser/"+$scope.User).then(function (res) {
+            if(res.data.length>0){
+              M.toast({html: 'User Already Exists !'});
+            }
+            else {
+              $http.post('/upload', $scope.User)
+              .success(function(data) {
+             
+                  console.log(data +" chrome wala data");
+              })
+              .error(function(data) {
+                  console.log('Error: ' + data);
+              });
+            }
+          });
+            
+        
+        };
+
+
+
+
         $('input#icon_telephone').characterCounter();
       });
 
@@ -454,7 +485,7 @@
 
 
           app.controller("southIndian",function ($rootScope,$scope) {
-      
+            $('.parallax').parallax();
             $rootScope.cartObj;
             $rootScope.total;
             $scope.itemsSouthIndianArr=
