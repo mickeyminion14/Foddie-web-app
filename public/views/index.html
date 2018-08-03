@@ -21,7 +21,7 @@
     <div class="navbar-fixed">
     <nav class=" amber darken-1" role="navigation">
       <div class="nav-wrapper container ">
-        <a href="" data-target="slide-out" class="sidenav-trigger show-on-large pulse tooltipped " data-position="bottom" data-tooltip="Menu">
+        <a href="" data-target="slide-out" class="sidenav-trigger show-on-large pulse  " data-position="bottom">
           <i class="material-icons">menu</i>
         </a>
         <a href="##">
@@ -166,11 +166,11 @@
     $(function () {
       $('select').formSelect();
       $('.dropdown-trigger').dropdown({
-        hover: true,
+        hover: false,
         coverTrigger: false
       });
       $('.sidenav').sidenav();
-      $('.tooltipped').tooltip();
+      
       $('.parallax').parallax();
     });
   </script>
