@@ -12,6 +12,6 @@ app.use(bodyparser.urlencoded ({extended : false}));
 
 app.use(express.static('./public'));
 
-app.listen(PORT, HOST, function () {
+app.listen(PORT, function () {
 	console.log("server running on https://"+HOST+":"+PORT+"/");
 });
