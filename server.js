@@ -6,8 +6,8 @@ app.use('/', routes);
 var fs = require('fs');
 var path  = require ('path');
 
-const PORT = process.env.port ? process.env.port : 8200; 
-const HOST = process.env.host ? process.env.host : '0.0.0.0';
+const PORT = process.env.port || 8200; 
+const HOST = process.env.host || '0.0.0.0';
 app.use(bodyparser.urlencoded ({extended : false}));
 
 app.use(express.static('./public'));
