@@ -5,10 +5,13 @@ var routes = require('./app/routes')
 app.use('/', routes);
 var fs = require('fs');
 var path  = require ('path');
+
+const PORT = process.env.port ? process.env.port : 8200; 
+const HOST = process.env.host ? process.env.host : '0.0.0.0';
 app.use(bodyparser.urlencoded ({extended : false}));
 
 app.use(express.static('./public'));
 
-app.listen(8200, function () {
-		console.log("server running on port 8200");
-	});
+app.listen(PORT, HOST, function () {
+	console.log("server running on https://"+HOST+":"+PORT+"/");
+});
