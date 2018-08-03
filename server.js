@@ -6,7 +6,7 @@ var app = express();
 var fs = require('fs');
 var path  = require ('path');
 
-const PORT = process.env.port || 8200; 
+const PORT = process.env.PORT || 8200; 
 const HOST = process.env.host || '0.0.0.0';
 app.use(bodyparser.urlencoded ({extended : false}));
 
