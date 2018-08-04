@@ -12,9 +12,7 @@ app.use(bodyparser.urlencoded ({extended : false}));
 
 app.use(express.static('./public'));
 
-app.get('/', (req, res) => {
-	res.send("Hello World");
-});
+
 
 app.listen(PORT, function () {
 	console.log("server running on https://"+HOST+":"+PORT+"/");
