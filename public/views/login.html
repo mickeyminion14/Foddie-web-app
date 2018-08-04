@@ -13,10 +13,11 @@
       <div class="row">
         <div class="input-field col s12">
            <i class="material-icons prefix">account_box</i>
-          <input placeholder="" id="email" type="email"  ng-model="email" name="email" required>
+          <input placeholder="" id="email" type="email" ng-minlength="8" ng-model="email" name="email" required>
           <label for="email">Email</label>
           <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
-            <span ng-show="myForm.email.$error.required">Email is required !</span>
+              <span ng-show="myForm.email.$error.required">Email is required !</span>
+              <span ng-show="myForm.email.$error.email">Invalid Email !</span>
             </span>
         </div>
       </div>
@@ -27,13 +28,14 @@
           <label for="password">Password</label>
           <span style="color:red" ng-show="myForm.password.$dirty && myForm.password.$invalid">
               <span ng-show="myForm.password.$error.required">Password is required !</span>
+              
               </span>
         </div>
       </div>
     
       <div class="center-align">
       <button class="btn waves-effect waves-light " type="submit" name="action" ng-click="validateLogin(email,password)" ng-disabled="myForm.email.$dirty && myForm.email.$invalid ||  
-      myForm.password.$dirty && myForm.password.$invalid || myForm.email.$untouched && myForm.password.$untouched ">Submit
+      myForm.password.$dirty && myForm.password.$invalid || myForm.email.$untouched && myForm.password.$untouched ||myForm.password.$pristine ||myForm.email.$pristine">Submit
     <i class="material-icons right">send</i>
 
   </button>

@@ -57,13 +57,13 @@
        });
        $location.path('/profile');
        $rootScope.loggedIn = 'true';
-       console.log(username+"=="+password);
+      //  console.log(username+"=="+password);
         
      } else {
        M.toast({
          html: ' PASSWORD OR EMAIL INCORRECT '
        })
-       console.log(username+"=="+password);
+      //  console.log(username+"=="+password);
 
 
        $location.path('/404');
