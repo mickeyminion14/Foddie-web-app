@@ -44,24 +44,27 @@
      })
  });
 
- app.controller("login", function ($rootScope, $location) {
+ app.controller("login", function ($rootScope, $location, $scope) {
 
-   $rootScope.username = "";
-   $rootScope.password = "";
+   $scope.email ;
+   $scope.password ;
    $rootScope.loc = $location.absUrl();
 
-   $rootScope.validateLogin = function (username, password) {
-     if (username == 'user1' && password == "password") {
+   $rootScope.validateLogin = function (email, password) {
+     if (email == "user1" && password == "12") {
        M.toast({
          html: 'LOGGED IN SUCCESSFULLY !'
-       })
+       });
        $location.path('/profile');
        $rootScope.loggedIn = 'true';
-
+       console.log(username+"=="+password);
+        
      } else {
        M.toast({
-         html: ' PASSWORD OR USERNAME INCORRECT '
+         html: ' PASSWORD OR EMAIL INCORRECT '
        })
+       console.log(username+"=="+password);
+
 
        $location.path('/404');
      }
@@ -74,8 +77,8 @@
    $scope.last_name;
    $scope.email;
    $scope.mobile;
-   $scope.password="";
-   $scope.confirm_password="";
+   $scope.password;
+   $scope.confirm_password;
 
    $scope.createUser = function () {
      $scope.User = {
