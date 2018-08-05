@@ -16,7 +16,7 @@
            <i class="material-icons prefix">account_box</i>
           <input placeholder="" id="first_name" data-length="15" type="text" name="first_name" class="validate" ng-model="first_name" required>
           <label for="first_name">FirstName</label>
-          <span  class="helper-text" data-error="FirstName must be within 15 characters !" ></span>  
+          <!-- <span  class="helper-text" data-error="FirstName must be within 15 characters !" ></span>   -->
           <span style="color:red" ng-show="myForm.first_name.$dirty && myForm.first_name.$invalid">
           <span ng-show="myForm.first_name.$error.required">First Name is required !</span>
           </span>
@@ -25,7 +25,7 @@
            
           <input placeholder="" id="last_name" data-length="15" type="text" class="validate" ng-model="last_name" name="last_name" required>
           <label for="last_name">LastName</label>
-          <span class="helper-text" data-error="LastName must be within 15 characters !" ></span>
+          <!-- <span class="helper-text" data-error="LastName must be within 15 characters !" ></span> -->
           <span style="color:red" ng-show="myForm.last_name.$dirty && myForm.last_name.$invalid">
           <span ng-show="myForm.last_name.$error.required">First Name is required !</span>
           </span>
