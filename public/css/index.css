@@ -10,7 +10,6 @@
   }
 
   footer {
-    
     /* padding-left: 300px; */
   }
 
@@ -18,12 +17,14 @@
     /* padding-left: 200px; */
   }
 
-
-  @media only screen and (max-width : 992px) {
-    header, main, footer {
+  @media only screen and (max-width: 992px) {
+    header,
+    main,
+    footer {
       padding-left: 0;
     }
   }
+
   select {
     background-color: rgba(255, 255, 255, 0.9);
     width: 100%;
@@ -40,18 +41,17 @@
   .bgimg {
     background-image: url('../images/sar.jpg');
     /* background-repeat: no-repeat; */
-}
-.cover {
-  background-color: #ffecb3;
-  /* background-repeat: no-repeat; */
-  
-}
-.primary-color {
-  color: #ffb300 ;
-}
+  }
 
-.accent-color {
-  color: #00c853 ;
-}
+  .cover {
+    background-color: #ffecb3;
+    /* background-repeat: no-repeat; */
+  }
 
-  
+  .primary-color {
+    color: #ffb300;
+  }
+
+  .accent-color {
+    color: #00c853;
+  }
