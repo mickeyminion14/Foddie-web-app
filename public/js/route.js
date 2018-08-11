@@ -44,66 +44,118 @@
      })
  });
 
- app.controller("login", function ($rootScope, $location, $scope) {
-
-   $scope.email ;
-   $scope.password ;
-   $rootScope.loc = $location.absUrl();
+ app.controller("login", function ($rootScope, $location, $scope, $timeout) {
+  
+    $scope.formData={};
+   $scope.formData.email ;
+   $scope.formData.password ;
+   $scope.loc = $location.absUrl();
 
    $rootScope.validateLogin = function (email, password) {
+    $("#subBtn").removeClass("scale-in");
+    $('#subBtn').addClass("scale-out");
+    $('#loader').css("visibility" , "visible");
      if (email == "user1" && password == "12") {
        M.toast({
          html: 'LOGGED IN SUCCESSFULLY !'
        });
-       $location.path('/profile');
-       $rootScope.loggedIn = 'true';
+       $timeout(function() {
+        // $location.path('/profile');
+
+        M.toast({
+          html: ' PASSWORD OR EMAIL INCORRECT '
+        })
+        $rootScope.loggedIn = 'true';
+        }, 3000);
+    
       //  console.log(username+"=="+password);
         
      } else {
-       M.toast({
-         html: ' PASSWORD OR EMAIL INCORRECT '
-       })
+     
       //  console.log(username+"=="+password);
 
 
-       $location.path('/404');
+      $timeout(function() {
+        // $location.path('/404');
+        $scope.formData = {};
+        $scope.myForm.$setPristine();
+        $('#subBtn').removeClass("scale-out");
+        $('#subBtn').addClass("scale-in");
+        $('#loader').css("visibility" , "hidden");
+        M.toast({
+          html: ' PASSWORD OR EMAIL INCORRECT '
+        })
+        }, 3000);
      }
    }
 
  });
 
- app.controller("signup", function ($rootScope, $scope, $http) {
-   $scope.first_name;
-   $scope.last_name;
-   $scope.email;
-   $scope.mobile;
-   $scope.password;
-   $scope.confirm_password;
+ app.controller("signup", function ($rootScope, $scope, $http, $location, $timeout) {
+  $scope.formData={};
+  $scope.loc = $location.absUrl();
+   $scope.formData.first_name;
+   $scope.formData.last_name;
+   $scope.formData.email;
+   $scope.formData.mobile;
+   $scope.formData.password;
+   $scope.formData.confirm_password;
 
    $scope.createUser = function () {
-     $scope.User = {
-       first_name: $scope.first_name,
-       last_name: $scope.last_name,
-       email: $scope.email,
-       password: $scope.password
-     };
-     $http.get("/createUser/" + $scope.User).then(function (res) {
-       if (res.data.length > 0) {
-         M.toast({
-           html: 'User Already Exists !'
-         });
-       } else {
-         $http.post('/upload', $scope.User)
-           .success(function (data) {
+     $("#subBtn").removeClass("scale-in");
+     $('#subBtn').addClass("scale-out");
+     $('#loader').css("visibility" , "visible");
+    //  $scope.User = {
+    //    first_name: $scope.first_name,
+    //    last_name: $scope.last_name,
+    //    email: $scope.email,
+    //    mobile:$scope.mobile,
+    //    password: $scope.password,
+    //  };
 
-             console.log(data + " chrome wala data");
-           })
-           .error(function (data) {
-             console.log('Error: ' + data);
-           });
-       }
+    
+     $http.post('/createUser', $scope.formData)
+     .success(function(data) {
+    
+      console.log(data);
+      if(data.insertedCount==1) {
+        M.toast({html: "User profile Created successfully !"});
+        $location.path('/login');
+      }
+      else {
+          if(data.email==$scope.formData.email){
+          
+               
+            $timeout(function() {
+              
+              $scope.formData = {};
+              $scope.myForm.$setPristine();
+              $('#subBtn').removeClass("scale-out");
+              $('#subBtn').addClass("scale-in");
+              $('#loader').css("visibility" , "hidden");
+              M.toast({html :"An Account Already Exists With the entered email !"});
+              }, 3000);
+          }
+
+          if(data.mobile==$scope.formData.mobile){
+            
+     
+            $timeout(function() {
+              // $location.path('/home');
+              $scope.formData = {};
+              $scope.myForm.$setPristine();
+              $('#subBtn').removeClass("scale-out");
+              $('#subBtn').addClass("scale-in");
+              $('#loader').css("visibility" , "hidden");
+              M.toast({html :"An Account Already Exists With the entered mobile number !"});
+              }, 3000);
+          }
+      }
+        
+     })
+     .error(function(data) {
+         console.log('Error: ' + data);
      });
-
 
    };
 

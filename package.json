@@ -20,6 +20,8 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "bower": "^1.8.4",
-    "express": "^4.16.3"
+    "express": "^4.16.3",
+    "mongod": "^2.0.0",
+    "mongodb": "^3.1.1"
   }
 }

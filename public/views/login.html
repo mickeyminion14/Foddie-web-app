@@ -11,17 +11,18 @@
           <span style="color:#424242;" class="card-title center-align ">
             <span style="font-size: 40px;" class="card-title">
               <span style="font-weight: 700">Welcome</span> back.</span>
-            <span style="font-size: 30px;"> <span style="font-weight: 500">  Login </span>into your account.</span>
+            <span style="font-size: 30px;">
+              <span style="font-weight: 500"> Login </span>into your account.</span>
             <br>
             <br>
           </span>
 
           <div class="row">
-            <form class="col s12 " name="myForm" novalidate>
+            <form class="col s12 " id="myForm" name="myForm" novalidate>
               <div class="row">
                 <div class="input-field col s12">
                   <i class="material-icons prefix">account_box</i>
-                  <input placeholder="" id="email" type="email" ng-minlength="8" ng-model="email" name="email" required>
+                  <input placeholder="" id="email" type="email" ng-minlength="8" ng-model="formData.email" name="email" required>
                   <label for="email">Email</label>
                   <span style="color:red" ng-show="myForm.email.$dirty && myForm.email.$invalid">
                     <span ng-show="myForm.email.$error.required">Email is required !</span>
@@ -32,7 +33,7 @@
               <div class="row ">
                 <div class="input-field col s12">
                   <i class="material-icons prefix">fingerprint</i>
-                  <input id="password" type="password" class="validate" ng-model="password" required name="password">
+                  <input id="password" type="password" class="validate" ng-model="formData.password" required name="password">
                   <label for="password">Password</label>
                   <span style="color:red" ng-show="myForm.password.$dirty && myForm.password.$invalid">
                     <span ng-show="myForm.password.$error.required">Password is required !</span>
@@ -42,7 +43,7 @@
               </div>
 
               <div class="center-align">
-                <button class="btn waves-effect waves-light green accent-4" type="submit" name="action" ng-click="validateLogin(email,password)"
+                <button id="subBtn" class="btn waves-effect waves-light green accent-4 scale-transition scale-in" type="submit" name="action" ng-click="validateLogin(email,password)"
                   ng-disabled="myForm.email.$dirty && myForm.email.$invalid ||  
       myForm.password.$dirty && myForm.password.$invalid || myForm.email.$untouched && myForm.password.$untouched ||myForm.password.$pristine ||myForm.email.$pristine">Login
                   <i class="material-icons right">send</i>
@@ -54,6 +55,9 @@
           </div>
         </div>
 
+        <div id="loader" style="visibility:hidden" class="progress green accent-4">
+          <div class="indeterminate white"></div>
+        </div>
       </div>
     </div>
   </div>
