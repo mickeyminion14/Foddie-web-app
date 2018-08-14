@@ -3,7 +3,7 @@ var router = express.Router();
 var fs = require('fs');
 var path  = require ('path');0
 var mng = require ('mongodb');
-var url = 'mongodb://localhost:27017/';
+var url = 'mongodb://sarthak:12345noni@ds121382.mlab.com:21382/foodie';
 var bodyParser = require('body-parser');
  router.use(bodyParser.urlencoded({'extended':'true'}));            
     router.use(bodyParser.json());   
@@ -22,28 +22,32 @@ router.get('/', function (req,res) {
 router.post("/createUser", function (req, res) {
   var found =true;
   // console.log(req.body);
-  mng.connect(url, function (err, db) {
+  mng.connect(url,{uri_decode_auth: true }, function (err, db) {
 
     if(err) throw err;
   
-    var data = db.db("cdac");
+    var data = db.db("foodie");
     
     data.collection("lol").find({$or :[{email:req.body.email},{mobile:req.body.mobile}]}).toArray(function (err,result) {
       if (err) throw err;
   // console.log("**********************************");
       if(result.length<=0) {
         found =false;
+        console.log(result+ "angel");
         
         data.collection("lol").insert(req.body, function (err,result) {
           if (err) throw err;
           console.log("Inserted");
-          res.send(result[0]);
+          console.log(result.result.ok);
+          res.send(result.result);
         });
       }
 
       else {
         found = true;
         console.log("found");
+        result[0].ok=0;
+        console.log(result[0]);
         res.send(result[0]);
       }
 

@@ -44,56 +44,56 @@
      })
  });
 
- app.controller("login", function ($rootScope, $location, $scope, $timeout) {
-  
-    $scope.formData={};
-   $scope.formData.email ;
-   $scope.formData.password ;
+ app.controller("login", function ($rootScope, $location, $scope, $timeout, $http) {
+
+   $scope.formData = {};
+   $scope.formData.email;
+   $scope.formData.password;
    $scope.loc = $location.absUrl();
 
    $rootScope.validateLogin = function (email, password) {
-    $("#subBtn").removeClass("scale-in");
-    $('#subBtn').addClass("scale-out");
-    $('#loader').css("visibility" , "visible");
+     $("#subBtn").removeClass("scale-in");
+     $('#subBtn').addClass("scale-out");
+     $('#loader').css("visibility", "visible");
      if (email == "user1" && password == "12") {
        M.toast({
          html: 'LOGGED IN SUCCESSFULLY !'
        });
-       $timeout(function() {
-        // $location.path('/profile');
+       $timeout(function () {
+         // $location.path('/profile');
 
-        M.toast({
-          html: ' PASSWORD OR EMAIL INCORRECT '
-        })
-        $rootScope.loggedIn = 'true';
-        }, 3000);
-    
-      //  console.log(username+"=="+password);
-        
+         M.toast({
+           html: ' PASSWORD OR EMAIL INCORRECT '
+         })
+         $rootScope.loggedIn = 'true';
+       }, 3000);
+
+       //  console.log(username+"=="+password);
+
      } else {
-     
-      //  console.log(username+"=="+password);
+
+       //  console.log(username+"=="+password);
 
 
-      $timeout(function() {
-        // $location.path('/404');
-        $scope.formData = {};
-        $scope.myForm.$setPristine();
-        $('#subBtn').removeClass("scale-out");
-        $('#subBtn').addClass("scale-in");
-        $('#loader').css("visibility" , "hidden");
-        M.toast({
-          html: ' PASSWORD OR EMAIL INCORRECT '
-        })
-        }, 3000);
+       $timeout(function () {
+         // $location.path('/404');
+         $scope.formData = {};
+         $scope.myForm.$setPristine();
+         $('#subBtn').removeClass("scale-out");
+         $('#subBtn').addClass("scale-in");
+         $('#loader').css("visibility", "hidden");
+         M.toast({
+           html: ' PASSWORD OR EMAIL INCORRECT '
+         })
+       }, 3000);
      }
    }
 
  });
 
  app.controller("signup", function ($rootScope, $scope, $http, $location, $timeout) {
-  $scope.formData={};
-  $scope.loc = $location.absUrl();
+   $scope.formData = {};
+   $scope.loc = $location.absUrl();
    $scope.formData.first_name;
    $scope.formData.last_name;
    $scope.formData.email;
@@ -104,58 +104,66 @@
    $scope.createUser = function () {
      $("#subBtn").removeClass("scale-in");
      $('#subBtn').addClass("scale-out");
-     $('#loader').css("visibility" , "visible");
-    //  $scope.User = {
-    //    first_name: $scope.first_name,
-    //    last_name: $scope.last_name,
-    //    email: $scope.email,
-    //    mobile:$scope.mobile,
-    //    password: $scope.password,
-    //  };
+     $('#loader').css("visibility", "visible");
+     //  $scope.User = {
+     //    first_name: $scope.first_name,
+     //    last_name: $scope.last_name,
+     //    email: $scope.email,
+     //    mobile:$scope.mobile,
+     //    password: $scope.password,
+     //  };
 
-    
+
      $http.post('/createUser', $scope.formData)
-     .success(function(data) {
-    
-      console.log(data);
-      if(data.insertedCount==1) {
-        M.toast({html: "User profile Created successfully !"});
-        $location.path('/login');
-      }
-      else {
-          if(data.email==$scope.formData.email){
-          
-               
-            $timeout(function() {
-              
-              $scope.formData = {};
-              $scope.myForm.$setPristine();
-              $('#subBtn').removeClass("scale-out");
-              $('#subBtn').addClass("scale-in");
-              $('#loader').css("visibility" , "hidden");
-              M.toast({html :"An Account Already Exists With the entered email !"});
-              }, 3000);
-          }
+       .success(function (data) {
 
-          if(data.mobile==$scope.formData.mobile){
-            
-     
-            $timeout(function() {
-              // $location.path('/home');
-              $scope.formData = {};
-              $scope.myForm.$setPristine();
-              $('#subBtn').removeClass("scale-out");
-              $('#subBtn').addClass("scale-in");
-              $('#loader').css("visibility" , "hidden");
-              M.toast({html :"An Account Already Exists With the entered mobile number !"});
-              }, 3000);
-          }
-      }
-        
-     })
-     .error(function(data) {
+         console.log(data);
+         if (data.ok == 1) {
+           M.toast({
+             html: "User profile Created successfully !",
+             displayLength:3000
+           });
+           $location.path('/login');
+         } else {
+           if (data.email == $scope.formData.email) {
+
+
+             $timeout(function () {
+
+               $scope.formData = {};
+               $scope.myForm.$setPristine();
+               $('#subBtn').removeClass("scale-out");
+               $('#subBtn').addClass("scale-in");
+               $('#loader').css("visibility", "hidden");
+               M.toast({
+                 html: "An Account Already Exists With the entered email !",
+                 displayLength:3000
+               });
+             }, 3000);
+           }
+
+           if (data.mobile == $scope.formData.mobile) {
+
+
+             $timeout(function () {
+               // $location.path('/home');
+               $scope.formData = {};
+               $scope.myForm.$setPristine();
+               $('#subBtn').removeClass("scale-out");
+               $('#subBtn').addClass("scale-in");
+               $('#loader').css("visibility", "hidden");
+               M.toast({
+                 html: "An Account Already Exists With the entered mobile number !",
+                 displayLength:3000
+               });
+             }, 3000);
+           }
+         }
+
+       })
+       .error(function (data) {
          console.log('Error: ' + data);
-     });
+       });
 
    };
 
