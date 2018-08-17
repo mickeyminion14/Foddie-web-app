@@ -8,10 +8,7 @@ var bodyParser = require('body-parser');
  router.use(bodyParser.urlencoded({'extended':'true'}));            
     router.use(bodyParser.json());   
 
-// router.use(function timeLog (req, res, next) {
-//     console.log('Time: ', Date.now())
-//     next()
-//   })
+
 
 router.get('/', function (req,res) {
 	
@@ -61,4 +58,39 @@ router.post("/createUser", function (req, res) {
    
 });
   
+router.post("/validateLogin", function (req, res) {
+  console.log(req.body);
+
+  mng.connect(url,{uri_decode_auth: true }, function (err, db) {
+
+    if(err) throw err;
+  
+    var data = db.db("foodie");
+    
+    data.collection("lol").find({email:req.body.email}).toArray(function (err,result) {
+      if (err) throw err;
+      
+      if(result.length>0 && result[0].password==req.body.password) {
+        console.log("record found");
+        console.log(result[0]);
+        result[0].ok=1;
+        res.send(result[0]);
+      
+    }
+      else {
+        console.log("not found");
+        console.log(result);
+        var result1 ={ok:0};
+        res.send(result1);
+      }
+  
+    });
+     
+     
+      
+  });
+  
+});
+
+
   module.exports = router;

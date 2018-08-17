@@ -14,7 +14,7 @@
        controller: "emp1"
      }).when("/profile", {
        templateUrl: "./views/profile.html",
-       controller: "login"
+       controller: "profile"
      }).when("/", {
        templateUrl: "./views/home.html",
        controller: "home"
@@ -50,44 +50,51 @@
    $scope.formData.email;
    $scope.formData.password;
    $scope.loc = $location.absUrl();
+   $rootScope.User;
 
    $rootScope.validateLogin = function (email, password) {
      $("#subBtn").removeClass("scale-in");
      $('#subBtn').addClass("scale-out");
      $('#loader').css("visibility", "visible");
-     if (email == "user1" && password == "12") {
-       M.toast({
-         html: 'LOGGED IN SUCCESSFULLY !'
+
+     $http.post('/validateLogin', $scope.formData)
+       .success(function (data) {
+
+         console.log(data);
+         if(data.ok==1) {
+          M.toast({
+            html: ' Login Sucessfull. ',
+            displayLength:3000
+          });
+
+          $rootScope.User=data;
+          $rootScope.loggedIn = 'true';
+          $location.path('/profile');
+         }
+         else {
+          $rootScope.loggedIn = 'false';
+          $timeout(function () {
+            // $location.path('/404');
+            $scope.formData = {};
+            $scope.myForm.$setPristine();
+            $('#subBtn').removeClass("scale-out");
+            $('#subBtn').addClass("scale-in");
+            $('#loader').css("visibility", "hidden");
+            M.toast({
+              html: ' PASSWORD OR EMAIL INCORRECT ',
+              displayLength:3000
+            })
+          }, 3000);
+        }
+    
+
+       })
+       .error(function (data) {
+         console.log('Error: ' + data);
        });
-       $timeout(function () {
-         // $location.path('/profile');
 
-         M.toast({
-           html: ' PASSWORD OR EMAIL INCORRECT '
-         })
-         $rootScope.loggedIn = 'true';
-       }, 3000);
-
-       //  console.log(username+"=="+password);
-
-     } else {
-
-       //  console.log(username+"=="+password);
-
-
-       $timeout(function () {
-         // $location.path('/404');
-         $scope.formData = {};
-         $scope.myForm.$setPristine();
-         $('#subBtn').removeClass("scale-out");
-         $('#subBtn').addClass("scale-in");
-         $('#loader').css("visibility", "hidden");
-         M.toast({
-           html: ' PASSWORD OR EMAIL INCORRECT '
-         })
-       }, 3000);
-     }
-   }
+   } 
+   
 
  });
 
@@ -380,12 +387,10 @@
 
 
  app.controller("home", function ($rootScope) {
-   $('.carousel.carousel-slider').carousel({
-     fullWidth: true
-   });
    $rootScope.loggedIn = 'false';
    $rootScope.cartObj = [];
    $rootScope.total = 0;
+   $rootScope.User;
 
  });
 
@@ -955,100 +960,112 @@
 
  app.controller("salads", function ($rootScope, $scope) {
 
-   $rootScope.cartObj;
-   $rootScope.total;
-   $scope.itemsSaladsArr = [
+  $rootScope.cartObj;
+  $rootScope.total;
+  $scope.itemsSaladsArr = [
 
-     {
-       item_id: "item1",
-       item_name: "Tomato Soup",
-       item_img: "./images/cuisines/soups/tomato.jpg"
-     },
-     {
-       item_id: "item2",
-       item_name: "Hot and Sour Soup",
-       item_img: "./images/cuisines/soups/hotnsour.jpg"
-     },
-     {
-       item_id: "item3",
-       item_name: "Cream and Corn Soup",
-       item_img: "./images/cuisines/soups/creamncorn.jpg"
-     },
-     {
-       item_id: "item4",
-       item_name: "Manchow Soup",
-       item_img: "./images/cuisines/soups/manchow.jpg"
-     }
-   ];
+    {
+      item_id: "item1",
+      item_name: "Tomato Soup",
+      item_img: "./images/cuisines/soups/tomato.jpg"
+    },
+    {
+      item_id: "item2",
+      item_name: "Hot and Sour Soup",
+      item_img: "./images/cuisines/soups/hotnsour.jpg"
+    },
+    {
+      item_id: "item3",
+      item_name: "Cream and Corn Soup",
+      item_img: "./images/cuisines/soups/creamncorn.jpg"
+    },
+    {
+      item_id: "item4",
+      item_name: "Manchow Soup",
+      item_img: "./images/cuisines/soups/manchow.jpg"
+    }
+  ];
 
-   $scope.detailsSalads = [{
-       quantity: "Half (serves 1)",
-       price: 60
-     },
-     {
-       quantity: "Full (serves 2)",
-       price: 100
-     }
+  $scope.detailsSalads = [{
+      quantity: "Half (serves 1)",
+      price: 60
+    },
+    {
+      quantity: "Full (serves 2)",
+      price: 100
+    }
 
-   ];
+  ];
 
-   $scope.getTotal = function () {
-     $rootScope.total = 0;
+  $scope.getTotal = function () {
+    $rootScope.total = 0;
 
-     angular.forEach($rootScope.cartObj, function (value, key) {
+    angular.forEach($rootScope.cartObj, function (value, key) {
 
-       $rootScope.total = value.subtotal + $rootScope.total;
+      $rootScope.total = value.subtotal + $rootScope.total;
 
-     });
+    });
 
-     console.log("total is " + $rootScope.total);
+    console.log("total is " + $rootScope.total);
 
-   };
+  };
 
-   $scope.addToCart = function (obj) {
+  $scope.addToCart = function (obj) {
 
-     $scope.found = 0;
+    $scope.found = 0;
 
-     if (obj.item_id.quantity == null) {
-       M.toast({
-         html: 'Please Select Quantity !'
-       });
-     } else {
-       M.toast({
-         html: 'Item Added To Cart'
-       });
+    if (obj.item_id.quantity == null) {
+      M.toast({
+        html: 'Please Select Quantity !'
+      });
+    } else {
+      M.toast({
+        html: 'Item Added To Cart'
+      });
 
-       console.log(obj.item_id.price);
+      console.log(obj.item_id.price);
 
-       angular.forEach($rootScope.cartObj, function (value, key) {
-         console.log(key + ': ' + value.item_name);
+      angular.forEach($rootScope.cartObj, function (value, key) {
+        console.log(key + ': ' + value.item_name);
 
-         if ((value.item_name == obj.item_name) && (value.item_id.quantity == obj.item_id.quantity)) {
-           value.itemCount++;
-           value.subtotal = value.itemCount * value.item_id.price;
-           $scope.getTotal();
-           $scope.found = 1;
-         }
-
-
-       });
-       if ($scope.found == 1) {
-
-       } else {
-         obj.itemCount = 1;
-         obj.subtotal = obj.item_id.price;
-         $rootScope.total = $rootScope.total + obj.subtotal;
-         console.log("gadbad total" + $rootScope.total);
-         $rootScope.cartObj.push(obj);
-       }
+        if ((value.item_name == obj.item_name) && (value.item_id.quantity == obj.item_id.quantity)) {
+          value.itemCount++;
+          value.subtotal = value.itemCount * value.item_id.price;
+          $scope.getTotal();
+          $scope.found = 1;
+        }
 
 
-       console.log($scope.cartObj)
+      });
+      if ($scope.found == 1) {
 
-     }
-   };
+      } else {
+        obj.itemCount = 1;
+        obj.subtotal = obj.item_id.price;
+        $rootScope.total = $rootScope.total + obj.subtotal;
+        console.log("gadbad total" + $rootScope.total);
+        $rootScope.cartObj.push(obj);
+      }
 
- });
+
+      console.log($scope.cartObj)
+
+    }
+  };
+
+});
+
+app.controller("profile", function ($rootScope, $scope) {
+
+  $rootScope.cartObj;
+  $rootScope.total;
+  $rootScope.User;
+
+ 
+
+  
+
+});
 
 
 
