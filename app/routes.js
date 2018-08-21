@@ -5,9 +5,11 @@ var path  = require ('path');0
 var mng = require ('mongodb');
 var url = 'mongodb://sarthak:12345noni@ds121382.mlab.com:21382/foodie';
 var bodyParser = require('body-parser');
- router.use(bodyParser.urlencoded({'extended':'true'}));            
-    router.use(bodyParser.json());   
+const fileUpload = require('express-fileupload');
 
+router.use(bodyParser.urlencoded({'extended':'true'}));            
+router.use(bodyParser.json());   
+router.use(fileUpload());
 
 
 router.get('/', function (req,res) {
@@ -17,8 +19,20 @@ router.get('/', function (req,res) {
 
 
 router.post("/createUser", function (req, res) {
+  console.log(req.body);
   var found =true;
-  // console.log(req.body);
+  // if (!req.files)
+  //   return res.send('No files were uploaded.');
+ 
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  if(req.files)  {
+  let profile_image = req.files.profile_image;
+ 
+  if(profile_image === undefined) 
+    return res.json( { error: true, mssg: 'Invalid Request' } )
+
+  console.log(profile_image);
+  }
   mng.connect(url,{uri_decode_auth: true }, function (err, db) {
 
     if(err) throw err;
@@ -32,20 +46,29 @@ router.post("/createUser", function (req, res) {
         found =false;
         console.log(result+ "angel");
         
-        data.collection("lol").insert(req.body, function (err,result) {
-          if (err) throw err;
-          console.log("Inserted");
-          console.log(result.result.ok);
-          res.send(result.result);
+        // Use the mv() method to place the file somewhere on your server
+        profile_image.mv('./public/media/'+req.body.email.split("@")[0], function(err) {
+          if (err)
+            return res.json({ error: true, mssg: err });
+
+          data.collection("lol").insert(req.body, function (err,result) {
+            if (err) throw err;
+            console.log("Inserted");
+            console.log(result.result.ok);
+            res.json({ error: false, mssg: result.result });
+          });          
         });
+
       }
 
       else {
-        found = true;
-        console.log("found");
-        result[0].ok=0;
-        console.log(result[0]);
-        res.send(result[0]);
+        // found = true;
+        // console.log("found");
+        // result[0].ok=0;
+        // console.log(result[0]);
+        // res.send(result[0]);
+        
+        res.json({ error: true, mssg: result[0] });
       }
 
      

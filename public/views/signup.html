@@ -73,6 +73,19 @@
                   </span>
                 </div>
               </div>
+              <div class="row">
+                  <div class="input-field col s12">
+              <div class="file-field input-field">
+                  <div class="btn">
+                    <input id="profile_image" name="profile_image" ng-model="formData.profile_image" type="file">
+                    <span>File</span>
+                  </div>
+                  <div class="file-path-wrapper">
+                    <input id="profile_image_text" class="file-path validate" type="text" required>
+                  </div>
+                </div>
+              </div>
+            </div>
 
               <div class="row ">
                 <div class="input-field col s12">
@@ -105,7 +118,7 @@
                 myForm.mobile.$dirty && myForm.mobile.$invalid ||  
                 myForm.password.$dirty && myForm.password.$invalid ||  
                 myForm.confirm_password.$dirty && myForm.confirm_password.$invalid || myForm.first_name.$untouched && myForm.last_name.$untouched && myForm.email.$untouched && myForm.mobile.$untouched && myForm.password.$untouched && myForm.confirm_password.$untouched
-                 ||myForm.first_name.$pristine ||myForm.last_name.$pristine ||myForm.email.$pristine ||myForm.mobile.$pristine ||myForm.password.$pristine ||myForm.confirm_password.$pristine || formData.password!=formData.confirm_password"   
+                  ||myForm.first_name.$pristine ||myForm.last_name.$pristine ||myForm.email.$pristine ||myForm.mobile.$pristine ||myForm.password.$pristine ||myForm.confirm_password.$pristine || formData.password!=formData.confirm_password"   
                   ng-click="createUser()">Submit
                   <i class="material-icons right white-text">send</i>
                 </button>

@@ -55,3 +55,10 @@
   .accent-color {
     color: #00c853;
   }
+  #profile_image {
+    
+      background-image:url('../images/default.jpg');
+      width:150px;
+      height: 150px;
+  
+  }

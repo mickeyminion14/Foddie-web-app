@@ -61,40 +61,39 @@
        .success(function (data) {
 
          console.log(data);
-         if(data.ok==1) {
-          M.toast({
-            html: ' Login Sucessfull. ',
-            displayLength:3000
-          });
+         if (data.ok == 1) {
+           M.toast({
+             html: ' Login Sucessfull. ',
+             displayLength: 3000
+           });
 
-          $rootScope.User=data;
-          $rootScope.loggedIn = 'true';
-          $location.path('/profile');
+           $rootScope.User = data;
+           $rootScope.loggedIn = 'true';
+           $location.path('/profile');
+         } else {
+           $rootScope.loggedIn = 'false';
+           $timeout(function () {
+             // $location.path('/404');
+             $scope.formData = {};
+             $scope.myForm.$setPristine();
+             $('#subBtn').removeClass("scale-out");
+             $('#subBtn').addClass("scale-in");
+             $('#loader').css("visibility", "hidden");
+             M.toast({
+               html: ' PASSWORD OR EMAIL INCORRECT ',
+               displayLength: 3000
+             })
+           }, 3000);
          }
-         else {
-          $rootScope.loggedIn = 'false';
-          $timeout(function () {
-            // $location.path('/404');
-            $scope.formData = {};
-            $scope.myForm.$setPristine();
-            $('#subBtn').removeClass("scale-out");
-            $('#subBtn').addClass("scale-in");
-            $('#loader').css("visibility", "hidden");
-            M.toast({
-              html: ' PASSWORD OR EMAIL INCORRECT ',
-              displayLength:3000
-            })
-          }, 3000);
-        }
-    
+
 
        })
        .error(function (data) {
          console.log('Error: ' + data);
        });
 
-   } 
-   
+   }
+
 
  });
 
@@ -107,9 +106,11 @@
    $scope.formData.mobile;
    $scope.formData.password;
    $scope.formData.confirm_password;
+   $scope.formData.profile_image;
+
 
    $scope.createUser = function () {
-     $("#subBtn").removeClass("scale-in");
+     //  $("#subBtn").removeClass("scale-in");
      $('#subBtn').addClass("scale-out");
      $('#loader').css("visibility", "visible");
      //  $scope.User = {
@@ -119,22 +120,36 @@
      //    mobile:$scope.mobile,
      //    password: $scope.password,
      //  };
+     let form_custom = new FormData();
+     form_custom.append('first_name', $scope.formData.first_name);
+     form_custom.append('last_name', $scope.formData.last_name);
+     form_custom.append('email', $scope.formData.email);
+     form_custom.append('mobile', $scope.formData.mobile);
+     form_custom.append('profile_imageUrl', '')
+     form_custom.append('password', $scope.formData.password);
+     // add check document.getElementById('profile_image').files[0] === undefined
+     if(!(document.getElementById('profile_image').files[0]==undefined||null)) { 
+     form_custom.append('profile_image', document.getElementById('profile_image').files[0]);
+     }
+     console.log($scope.formData);
 
-
-     $http.post('/createUser', $scope.formData)
+     $http.post('/createUser', form_custom, {
+         transformRequest: angular.identity,
+         headers: {
+           'Content-Type': undefined
+         }
+       })
        .success(function (data) {
 
          console.log(data);
-         if (data.ok == 1) {
+         if (!data.error) {
            M.toast({
              html: "User profile Created successfully !",
-             displayLength:3000
+             displayLength: 3000
            });
            $location.path('/login');
          } else {
-           if (data.email == $scope.formData.email) {
-
-
+           if (data.mssg.email == $scope.formData.email) {
              $timeout(function () {
 
                $scope.formData = {};
@@ -144,24 +159,25 @@
                $('#loader').css("visibility", "hidden");
                M.toast({
                  html: "An Account Already Exists With the entered email !",
-                 displayLength:3000
+                 displayLength: 3000
                });
              }, 3000);
            }
 
-           if (data.mobile == $scope.formData.mobile) {
+           if (data.mssg.mobile == $scope.formData.mobile) {
 
 
              $timeout(function () {
                // $location.path('/home');
                $scope.formData = {};
                $scope.myForm.$setPristine();
+              
                $('#subBtn').removeClass("scale-out");
                $('#subBtn').addClass("scale-in");
                $('#loader').css("visibility", "hidden");
                M.toast({
                  html: "An Account Already Exists With the entered mobile number !",
-                 displayLength:3000
+                 displayLength: 3000
                });
              }, 3000);
            }
@@ -376,10 +392,6 @@
 
      }
    };
-
-
-
-
 
  });
 
@@ -960,112 +972,112 @@
 
  app.controller("salads", function ($rootScope, $scope) {
 
-  $rootScope.cartObj;
-  $rootScope.total;
-  $scope.itemsSaladsArr = [
+   $rootScope.cartObj;
+   $rootScope.total;
+   $scope.itemsSaladsArr = [
 
-    {
-      item_id: "item1",
-      item_name: "Tomato Soup",
-      item_img: "./images/cuisines/soups/tomato.jpg"
-    },
-    {
-      item_id: "item2",
-      item_name: "Hot and Sour Soup",
-      item_img: "./images/cuisines/soups/hotnsour.jpg"
-    },
-    {
-      item_id: "item3",
-      item_name: "Cream and Corn Soup",
-      item_img: "./images/cuisines/soups/creamncorn.jpg"
-    },
-    {
-      item_id: "item4",
-      item_name: "Manchow Soup",
-      item_img: "./images/cuisines/soups/manchow.jpg"
-    }
-  ];
+     {
+       item_id: "item1",
+       item_name: "Tomato Soup",
+       item_img: "./images/cuisines/soups/tomato.jpg"
+     },
+     {
+       item_id: "item2",
+       item_name: "Hot and Sour Soup",
+       item_img: "./images/cuisines/soups/hotnsour.jpg"
+     },
+     {
+       item_id: "item3",
+       item_name: "Cream and Corn Soup",
+       item_img: "./images/cuisines/soups/creamncorn.jpg"
+     },
+     {
+       item_id: "item4",
+       item_name: "Manchow Soup",
+       item_img: "./images/cuisines/soups/manchow.jpg"
+     }
+   ];
 
-  $scope.detailsSalads = [{
-      quantity: "Half (serves 1)",
-      price: 60
-    },
-    {
-      quantity: "Full (serves 2)",
-      price: 100
-    }
+   $scope.detailsSalads = [{
+       quantity: "Half (serves 1)",
+       price: 60
+     },
+     {
+       quantity: "Full (serves 2)",
+       price: 100
+     }
 
-  ];
+   ];
 
-  $scope.getTotal = function () {
-    $rootScope.total = 0;
+   $scope.getTotal = function () {
+     $rootScope.total = 0;
 
-    angular.forEach($rootScope.cartObj, function (value, key) {
+     angular.forEach($rootScope.cartObj, function (value, key) {
 
-      $rootScope.total = value.subtotal + $rootScope.total;
+       $rootScope.total = value.subtotal + $rootScope.total;
 
-    });
+     });
 
-    console.log("total is " + $rootScope.total);
+     console.log("total is " + $rootScope.total);
 
-  };
+   };
 
-  $scope.addToCart = function (obj) {
+   $scope.addToCart = function (obj) {
 
-    $scope.found = 0;
+     $scope.found = 0;
 
-    if (obj.item_id.quantity == null) {
-      M.toast({
-        html: 'Please Select Quantity !'
-      });
-    } else {
-      M.toast({
-        html: 'Item Added To Cart'
-      });
+     if (obj.item_id.quantity == null) {
+       M.toast({
+         html: 'Please Select Quantity !'
+       });
+     } else {
+       M.toast({
+         html: 'Item Added To Cart'
+       });
 
-      console.log(obj.item_id.price);
+       console.log(obj.item_id.price);
 
-      angular.forEach($rootScope.cartObj, function (value, key) {
-        console.log(key + ': ' + value.item_name);
+       angular.forEach($rootScope.cartObj, function (value, key) {
+         console.log(key + ': ' + value.item_name);
 
-        if ((value.item_name == obj.item_name) && (value.item_id.quantity == obj.item_id.quantity)) {
-          value.itemCount++;
-          value.subtotal = value.itemCount * value.item_id.price;
-          $scope.getTotal();
-          $scope.found = 1;
-        }
-
-
-      });
-      if ($scope.found == 1) {
-
-      } else {
-        obj.itemCount = 1;
-        obj.subtotal = obj.item_id.price;
-        $rootScope.total = $rootScope.total + obj.subtotal;
-        console.log("gadbad total" + $rootScope.total);
-        $rootScope.cartObj.push(obj);
-      }
+         if ((value.item_name == obj.item_name) && (value.item_id.quantity == obj.item_id.quantity)) {
+           value.itemCount++;
+           value.subtotal = value.itemCount * value.item_id.price;
+           $scope.getTotal();
+           $scope.found = 1;
+         }
 
 
-      console.log($scope.cartObj)
+       });
+       if ($scope.found == 1) {
 
-    }
-  };
+       } else {
+         obj.itemCount = 1;
+         obj.subtotal = obj.item_id.price;
+         $rootScope.total = $rootScope.total + obj.subtotal;
+         console.log("gadbad total" + $rootScope.total);
+         $rootScope.cartObj.push(obj);
+       }
 
-});
 
-app.controller("profile", function ($rootScope, $scope) {
+       console.log($scope.cartObj)
 
-  $rootScope.cartObj;
-  $rootScope.total;
-  $rootScope.User;
+     }
+   };
 
- 
+ });
 
-  
+ app.controller("profile", function ($rootScope, $scope) {
+   $('.materialboxed').materialbox();
+   $rootScope.cartObj;
+   $rootScope.total;
+   $rootScope.User;
 
-});
+
+
+
+
+ });
 
 
 
