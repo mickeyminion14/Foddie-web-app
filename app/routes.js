@@ -21,18 +21,28 @@ router.get('/', function (req,res) {
 router.post("/createUser", function (req, res) {
   console.log(req.body);
   var found =true;
+  let profile_image;
+  if(!req.files) {
+profile_image=null;
+   }
+  
+  else {
+   profile_image = req.files.profile_image;
+}
+  // let profile_image = req.files.profile_image;
   // if (!req.files)
+  // {
+    
+  //   console.log("server crash 500");
   //   return res.send('No files were uploaded.');
- 
+  // }
   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
-  if(req.files)  {
-  let profile_image = req.files.profile_image;
- 
-  if(profile_image === undefined) 
-    return res.json( { error: true, mssg: 'Invalid Request' } )
+
+  // if(profile_image === undefined) 
+  //   return res.json( { error: true, mssg: 'Invalid Request' } )
 
   console.log(profile_image);
-  }
+  
   mng.connect(url,{uri_decode_auth: true }, function (err, db) {
 
     if(err) throw err;
@@ -47,17 +57,22 @@ router.post("/createUser", function (req, res) {
         console.log(result+ "angel");
         
         // Use the mv() method to place the file somewhere on your server
+        if(profile_image==null) {
+          console.log("no files were uploaded")
+        }
+        else {
         profile_image.mv('./public/media/'+req.body.email.split("@")[0], function(err) {
           if (err)
             return res.json({ error: true, mssg: err });
-
-          data.collection("lol").insert(req.body, function (err,result) {
-            if (err) throw err;
-            console.log("Inserted");
-            console.log(result.result.ok);
-            res.json({ error: false, mssg: result.result });
-          });          
+          
         });
+      }
+        data.collection("lol").insert(req.body, function (err,result) {
+          if (err) throw err;
+          console.log("Inserted");
+          console.log(result.result.ok);
+          res.json({ error: false, mssg: result.result });
+        });   
 
       }
 
