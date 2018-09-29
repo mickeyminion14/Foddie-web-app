@@ -1,4 +1,4 @@
- var app = angular.module("FirstApp", ["ngRoute"]);
+ var app = angular.module("FirstApp", ['ngRoute','ngStorage']);
  app.config(function ($routeProvider) {
    // body...
    $routeProvider
@@ -39,18 +39,25 @@
        controller: "southIndian"
      })
      .when("/soups", {
-       templateUrl: "./views/cuisines/soups.html",
-       controller: "soups"
-     })
+      templateUrl: "./views/cuisines/soups.html",
+      controller: "soups"
+    })
+      .when("/home", {
+        templateUrl: "./views/home.html",
+        controller: "home"
+      })
  });
 
- app.controller("login", function ($rootScope, $location, $scope, $timeout, $http) {
+ app.controller("login", function ($rootScope, $location, $scope, $timeout, $http, $window, $localStorage) {
 
+   $localStorage.User;
+   $localStorage.loggedIn;
    $scope.formData = {};
    $scope.formData.email;
    $scope.formData.password;
    $scope.loc = $location.absUrl();
-   $rootScope.User;
+   $rootScope.User= $localStorage.User||null;
+  console.log($localStorage.User);
 
    $rootScope.validateLogin = function (email, password) {
      $("#subBtn").removeClass("scale-in");
@@ -67,11 +74,16 @@
              displayLength: 3000
            });
 
+
            $rootScope.User = data;
            $rootScope.loggedIn = 'true';
+           $localStorage.loggedIn=$rootScope.loggedIn;
+           $localStorage.User=$rootScope.User;
            $location.path('/profile');
-         } else {
+         }
+          else {
            $rootScope.loggedIn = 'false';
+           $localStorage.loggedIn=$rootScope.loggedIn;
            $timeout(function () {
              // $location.path('/404');
              $scope.formData = {};
@@ -148,7 +160,8 @@
              displayLength: 3000
            });
            $location.path('/login');
-         } else {
+         }
+          else {
            if (data.mssg.email == $scope.formData.email) {
              $timeout(function () {
 
@@ -398,11 +411,25 @@
 
 
 
- app.controller("home", function ($rootScope) {
-   $rootScope.loggedIn = 'false';
+ app.controller("home", function ($rootScope,$scope,$location,$window, $localStorage) {
+   $rootScope.loggedIn = $localStorage.loggedIn||'false';
+  //  if($rootScope.loggedIn=="true") {}
+
    $rootScope.cartObj = [];
    $rootScope.total = 0;
    $rootScope.User;
+
+   $scope.logout= function () {
+    
+    $rootScope.loggedIn='false';
+    M.toast({html:"Logged Out Successfully !"});
+    $window.localStorage.setItem("loggedIn","false");
+    $location.path("/login");
+
+
+   };
+
+
 
  });
 
@@ -1067,11 +1094,20 @@
 
  });
 
- app.controller("profile", function ($rootScope, $scope) {
+ app.controller("profile", function ($rootScope, $scope,$window) {
    $('.materialboxed').materialbox();
    $rootScope.cartObj;
    $rootScope.total;
-   $rootScope.User;
+  
+   $rootScope.User= JSON.parse($window.localStorage.getItem("user"))||null;
+  $rootScope.loggedIn;
+   $scope.pastOrders = function () {
+    M.toast({
+      html: 'Item Added To Cart'
+    });
+    console.log($window.localStorage.getItem("user"));
+    console.log($rootScope.loggedIn);
+   };
 
 
 
