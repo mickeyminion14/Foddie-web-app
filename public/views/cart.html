@@ -20,11 +20,37 @@
     </tr>
    
   </tbody>
-  TOTAL: {{total}}
+ 
 </table>
+<div class="row">
+  <div class="col s6">
+    <div style="margin: 40px 10px">
+      <div class="waves-effect waves-light btn-small modal-trigger" data-target="modal1" ng-click="checkOut()">CheckOut</div>
+       
+      </div>
+  </div>
+  <div class="col s6">
+    <div style="margin: 40px 10px"> TOTAL: {{total}}</div>
+  </div>
+  
+</div>
+
 </div>
 
 <div class="container striped section white" ng-show="total==0">
   <h6 class="center" style="font-size: 30px;"><img src="../images/cartempty.png" height="150" width="150"><br>Sorry!<br>Your Cart is Empty!<br>Please Add Some Items From Our Menu.</h6><br><br> 
 
 </div>
+
+<!-- <a class="waves-effect waves-light btn modal-trigger" data-target="modal1">Modal</a> -->
+
+  <!-- Modal Structure -->
+  <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+      <a  class="modal-close waves-effect waves-green btn-flat">`</a>
+    </div>
+  </div>
