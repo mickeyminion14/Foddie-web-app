@@ -2,7 +2,6 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var path = require('path');
-0
 var mng = require('mongodb');
 var url = 'mongodb://sarthak:12345noni@ds121382.mlab.com:21382/foodie';
 var bodyParser = require('body-parser');

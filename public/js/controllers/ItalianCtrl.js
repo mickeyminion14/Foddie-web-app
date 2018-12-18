@@ -1,4 +1,4 @@
-angular.module("ItalianCtrl",[]).controller("ItalianController", function ($rootScope, $scope){
+angular.module("ItalianCtrl",[]).controller("ItalianController", function ($rootScope, $scope, $localStorage){
   $("#main").removeClass("home");
   $('#main').addClass("bgimg");
   $rootScope.cartObj;
@@ -143,6 +143,8 @@ angular.module("ItalianCtrl",[]).controller("ItalianController", function ($root
 
 
       console.log($scope.cartObj)
+      $localStorage.cartObj=$rootScope.cartObj;
+
 
     }
   };

@@ -5,9 +5,9 @@
   $rootScope.loggedIn = $localStorage.loggedIn || 'false';
   //  if($rootScope.loggedIn=="true") {}
   $localStorage.cartObj;
-  $rootScope.cartObj = [];
+  $rootScope.cartObj = $localStorage.cartObj||[];
   
-  $rootScope.total = 0;
+  $rootScope.total = $localStorage.total || 0;
   $rootScope.User;
 
   $scope.logout = function () {
@@ -16,8 +16,25 @@
     M.toast({
       html: "Logged Out Successfully !"
     });
-    $window.localStorage.setItem("loggedIn", "false");
+    $localStorage.loggedIn= "false";
+    $localStorage.cartObj="";
+    $localStorage.total=0;
     $location.path("/login");
 
   }
+
+
+
+  $scope.getTotal = function () {
+    $rootScope.total = 0;
+
+    angular.forEach($rootScope.cartObj, function (value, key) {
+
+      $rootScope.total = value.subtotal + $rootScope.total;
+
+    });
+    $localStorage.total=$rootScope.total;
+    console.log("total is " + $rootScope.total);
+
+  };
   });

@@ -1,4 +1,4 @@
-angular.module("SoupsCtrl",[]).controller("SoupsController", function ($rootScope, $scope){
+angular.module("SoupsCtrl",[]).controller("SoupsController", function ($rootScope, $scope, $localStorage){
   $("#main").removeClass("home");
   $('#main').addClass("bgimg");
   $rootScope.cartObj;
@@ -89,7 +89,10 @@ angular.module("SoupsCtrl",[]).controller("SoupsController", function ($rootScop
       }
 
 
-      console.log($scope.cartObj)
+      console.log($scope.cartObj);
+      $localStorage.cartObj=$rootScope.cartObj;
+
+
 
     }
   };

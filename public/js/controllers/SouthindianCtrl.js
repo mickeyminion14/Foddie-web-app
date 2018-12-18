@@ -1,4 +1,4 @@
-angular.module("SouthindianCtrl",[]).controller("SouthindianController", function ($rootScope, $scope){
+angular.module("SouthindianCtrl",[]).controller("SouthindianController", function ($rootScope, $scope, $localStorage){
   $("#main").removeClass("home");
    $('#main').addClass("bgimg");
    $rootScope.cartObj;
@@ -99,7 +99,10 @@ angular.module("SouthindianCtrl",[]).controller("SouthindianController", functio
        }
 
 
-       console.log($scope.cartObj)
+       console.log($scope.cartObj);
+       $localStorage.cartObj=$rootScope.cartObj;
+
+
 
      }
    };

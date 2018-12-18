@@ -1,11 +1,15 @@
-angular.module("CartCtrl",[]).controller("CartController", function ($rootScope, $scope){
+angular.module("CartCtrl",[]).controller("CartController", function ($rootScope, $scope, $localStorage){
     $('.modal').modal(); 
-  $rootScope.cartObj;
+    $("#main").removeClass("home");
+    $('#main').addClass("bgimg");
+  $rootScope.cartObj=$localStorage.cartObj|| [];
    $rootScope.total;
-   $scope.checkOut = function () {
-    //  console.log($rootScope.cartObj);
+  
+   $rootScope.lol="sarthak";
+  //  $scope.checkOut = function () {
+     console.log($rootScope.cartObj);
 
-   }
+  //  }
 
    $scope.increaseItemCount = function (item) {
      console.log(item);
@@ -66,7 +70,7 @@ angular.module("CartCtrl",[]).controller("CartController", function ($rootScope,
        $rootScope.total = value.subtotal + $rootScope.total;
 
      });
-
+     $localStorage.total=$rootScope.total;
      console.log("total is " + $rootScope.total);
 
    };

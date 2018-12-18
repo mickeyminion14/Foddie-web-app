@@ -1,6 +1,8 @@
-angular.module("ChineseCtrl",[]).controller("ChineseController", function ($rootScope, $scope){
+angular.module("ChineseCtrl",[]).controller("ChineseController", function ($rootScope, $scope, $localStorage){
   $("#main").removeClass("home");
    $('#main').addClass("bgimg");
+   $localStorage.cartObj;
+
    $rootScope.cartObj;
    $rootScope.total;
    $scope.itemsChineseArr = [
@@ -127,12 +129,8 @@ angular.module("ChineseCtrl",[]).controller("ChineseController", function ($root
          console.log("gadbad total" + $rootScope.total);
          $rootScope.cartObj.push(obj);
        }
-
-
-       console.log($scope.cartObj)
-
+       console.log($scope.cartObj);
+       $localStorage.cartObj=$rootScope.cartObj;
      }
    };
-
-
 });

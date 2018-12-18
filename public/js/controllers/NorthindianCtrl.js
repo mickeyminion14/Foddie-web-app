@@ -192,7 +192,10 @@
         }
  
  
-        console.log($scope.cartObj)
+        console.log($scope.cartObj);
+        $localStorage.cartObj=$rootScope.cartObj;
+
+
  
       }
     };
