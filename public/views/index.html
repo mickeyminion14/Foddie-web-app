@@ -47,10 +47,10 @@
         <a href="" data-target="slide-out" class="sidenav-trigger show-on-large pulse  " data-position="bottom">
           <i class="material-icons">menu</i>
         </a>
-        <a href="#home">
+        <a href="#italian">
           <img src="images/steak.png" height="60" width="60" style="margin-top: 2px;">
         </a>
-        <a href="#home" class="brand-logo center" style="margin-right: 30px">Foodie</a>
+        <a href="#home" class="brand-logo center" >Foodie</a>
 
         <ul class="right show-on-medium-and-down hide-on-med-and-up">
           <li>
@@ -77,8 +77,8 @@
             <a href="#cart" ng-click="getTotal()">
               <i class=" material-icons  left">shopping_cart</i>Cart</a>
           </li>
-          <li >
-            <a href="" ng-if="loggedIn=='true'" ng-click="logout()" style="display: flex;position: static;">
+          <li ng-if="loggedIn=='true'">
+            <a href=""  ng-click="logout()" >
             <img src="../images/icons/logout.png" style="width: 20px;height: 20px; margin-top: 23px;">
 
              &nbsp; Logout  </a>
@@ -181,7 +181,7 @@
 
   <footer class="page-footer amber darken-1">
 
-    <div class=" footer-copyright">
+    <div class="footer-copyright">
       <div class="container">
         © 2018 Copyright
         <a class="grey-text text-lighten-4  right" href="#!" style="padding-left: 10px;">Contact Us </a>
