@@ -1,6 +1,6 @@
  var app = angular.module("FirstApp", 
  ['ngRoute', 'ngStorage','CartCtrl', 'ChineseCtrl', 'HomeCtrl', 'ItalianCtrl', 'LoginCtrl', 'NorthindianCtrl', 
- 'ProfileCtrl', 'SaladsCtrl', 'SignupCtrl', 'SoupsCtrl', 'SouthindianCtrl']);
+ 'ProfileCtrl', 'SaladsCtrl', 'SignupCtrl', 'SoupsCtrl', 'SouthindianCtrl', 'OrderProcessingCtrl']);
  app.config(function ($routeProvider) {
    // body...
    $routeProvider
@@ -55,7 +55,11 @@
      .when("/home", {
        templateUrl: "./views/home.html",
        controller: "HomeController"
-     })
+     })  
+     .when("/processorder", {
+      templateUrl: "./views/orderprocessing.html",
+      controller: "OrderProcessingController"
+    })
  });
 
 //  app.controller("login", function ($rootScope, $location, $scope, $timeout, $http, $window, $localStorage) {

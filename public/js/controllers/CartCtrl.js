@@ -1,15 +1,16 @@
-angular.module("CartCtrl",[]).controller("CartController", function ($rootScope, $scope, $localStorage){
+angular.module("CartCtrl",[]).controller("CartController", function ($rootScope, $scope, $localStorage, $location){
     $('.modal').modal(); 
     $("#main").removeClass("home");
     $('#main').addClass("bgimg");
-  $rootScope.cartObj=$localStorage.cartObj|| [];
+  $rootScope.cartObj=$localStorage.cartObj || [];
    $rootScope.total;
   
    $rootScope.lol="sarthak";
-  //  $scope.checkOut = function () {
+   $scope.checkOut = function () {
+    $location.path("/processorder");
      console.log($rootScope.cartObj);
 
-  //  }
+   }
 
    $scope.increaseItemCount = function (item) {
      console.log(item);

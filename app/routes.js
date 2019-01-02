@@ -136,5 +136,32 @@ router.post("/validateLogin", function (req, res) {
   });
 });
 
+router.post("/processOrder", function (req, res) {
+  console.log(req.body.user.email);
+
+  mng.connect(url, {
+    uri_decode_auth: true
+  }, function (err, db) {
+
+    if (err) throw err;
+
+    var data = db.db("foodie");
+
+    data.collection("lol").updateOne({email : req.body.user.email},{$push: { past_orders: req.body.cartObj }}, function(err, result) {
+      if(err) {
+        throw err;
+      }
+
+      else {
+        console.log("added to past orders");
+        res.json({
+          added : true
+        });
+      }
+    })
+  });
+
+ 
+});
 
 module.exports = router;

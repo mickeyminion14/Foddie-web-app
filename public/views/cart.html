@@ -1,5 +1,5 @@
 
-<div class="container striped section white"  >
+<div class="container striped section white"  style="padding: 50px; margin-top: 50px;" ng-show="total!=0">
   <h6 class="center" style="font-size: 30px;"><i class=" material-icons  center large">shopping_cart</i><br>Cart </h6><br><br> 
 <table class="responsive-table">
   <thead>
@@ -16,7 +16,7 @@
       <td>{{item.item_name}}</td>
       <td>{{item.item_id.quantity}}</td>
       <td>x {{item.itemCount}}</td>
-      <td> {{item.subtotal}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a class="waves-effect waves-light circle btn-small" style="border-radius: 70%;" ng-click="increaseItemCount(item)"><i class=" material-icons small">add</i> </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="waves-effect waves-light circle btn-small" style="border-radius: 70%;"  ng-click="decreaseItemCount(item)"><i class=" material-icons small">remove</i></a></td>
+      <td> {{item.subtotal}}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <a class="waves-effect waves-light green accent-4 circle btn-small" style="border-radius: 70%;" ng-click="increaseItemCount(item)"><i class=" material-icons small">add</i> </a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a class="waves-effect waves-light green accent-4 circle btn-small" style="border-radius: 70%;"  ng-click="decreaseItemCount(item)"><i class=" material-icons small">remove</i></a></td>
     </tr>
    
   </tbody>
@@ -25,7 +25,7 @@
 <div class="row">
   <div class="col s6">
     <div style="margin: 40px 10px">
-      <div class="waves-effect waves-light btn-small modal-trigger" data-target="modal1" ng-click="checkOut()">CheckOut</div>
+      <div class="waves-effect waves-light green accent-4 btn-small modal-trigger" data-target="modal1" >CheckOut</div>
        
       </div>
   </div>
@@ -51,6 +51,7 @@
       <p>A bunch of text</p>
     </div>
     <div class="modal-footer">
-      <a  class="modal-close waves-effect waves-green btn-flat">`</a>
+        <a  class="modal-close waves-effect waves-green btn-flat">No</a>
+      <a  href="" ng-click="checkOut()" class="modal-close waves-effect waves-green btn-flat">Yes</a>
     </div>
   </div>

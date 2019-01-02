@@ -3,6 +3,8 @@ angular.module("ProfileCtrl",[]).controller("ProfileController", function ($root
   $("#main").removeClass("home");
   $('#main').addClass("bgimg");
   $('.materialboxed').materialbox();
+  $rootScope.NavBarVisibilty = "true";
+  $rootScope.MobileNavBarVisibilty = "true";  
   $rootScope.cartObj;
   $rootScope.total;
   $localStorage.User;

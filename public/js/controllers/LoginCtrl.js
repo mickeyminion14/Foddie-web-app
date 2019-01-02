@@ -19,15 +19,12 @@
  
       $http.post('/validateLogin', $scope.formData)
         .success(function (data) {
- 
           console.log(data);
           if (data.ok == 1) {
             M.toast({
               html: ' Login Sucessfull. ',
               displayLength: 3000
             });
- 
- 
             $rootScope.User = data;
             $rootScope.loggedIn = 'true';
             $localStorage.loggedIn = $rootScope.loggedIn;

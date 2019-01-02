@@ -2,6 +2,8 @@
   angular.module("HomeCtrl",[]).controller("HomeController", function ($rootScope, $scope, $location, $window, $localStorage){
   $("#main").removeClass("bgimg");
   $('#main').addClass("home");
+  $rootScope.NavBarVisibilty = "true";
+  $rootScope.MobileNavBarVisibilty = "true";  
   $rootScope.loggedIn = $localStorage.loggedIn || 'false';
   //  if($rootScope.loggedIn=="true") {}
   $localStorage.cartObj;
@@ -18,7 +20,10 @@
     });
     $localStorage.loggedIn= "false";
     $localStorage.cartObj="";
+    $rootScope.total=0;
     $localStorage.total=0;
+    $localStorage.User = "";
+    $rootScope.User="";
     $location.path("/login");
 
   }
