@@ -164,4 +164,32 @@ router.post("/processOrder", function (req, res) {
  
 });
 
+router.post("/pastorders", function (req, res) {
+  console.log(req.body.user.email);
+
+  mng.connect(url, {
+    uri_decode_auth: true
+  }, function (err, db) {
+
+    if (err) throw err;
+
+    var data = db.db("foodie");
+
+    data.collection("lol").find({
+      email: req.body.user.email
+    }).toArray(function (err, result) {
+      if (err) throw err;
+
+     else {
+       console.log(result[0].past_orders);
+        res.json({
+          response :result[0].past_orders
+        });
+      }
+    });
+  });
+
+ 
+});
+
 module.exports = router;

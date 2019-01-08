@@ -1,0 +1,78 @@
+<!-- <h1>{{temp.response}}</h1> -->
+
+<div class="container striped section white"  style="padding: 50px; margin-top: 50px;" ng-show= "datarecieved==true">
+  <h6 class="center" style="font-size: 30px;"><i class=" material-icons  center large">shopping_cart</i><br>Cart </h6><br><br> 
+<table class="responsive-table">
+  <thead>
+    <tr>
+        <th>Item Number</th>
+        <th>Item Name</th>
+        <th>Quantity</th>
+        <th>Item Count</th>
+        <th>Subtotal</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <tr ng-repeat="(x,y) in finalpastorders">
+      <!-- <div ng-repeat = " items in item"> -->
+      <td>{{x+1}}</td>
+      <td >{{y.item_name}}</td>
+      <td>{{y.item_id.quantity}}</td>
+      <td>{{y.itemCount}}</td>
+      <td>{{y.subtotal}}</td>
+      
+      <!-- <td>{{items.item_id.quantity}}</td>
+      <td>x {{items.itemCount}}</td>
+      <td> {{items.subtotal}}</td> -->
+    <!-- </div> -->
+    </tr>
+   
+  </tbody>
+ 
+</table>
+
+          
+<!-- <div class="row">
+  <div class="col s6">
+    <div style="margin: 40px 10px"> -->
+      <!-- <div class="waves-effect waves-light green accent-4 btn-small modal-trigger" data-target="modal1" >CheckOut</div> -->
+       
+      <!-- </div> -->
+  <!-- </div> -->
+  <div class="col s6">
+    <div style="margin: 40px 10px"> TOTAL: {{totalpast}}</div>
+  </div>
+
+  <ul class="pagination center" id="paginationTabs">
+    <li class="disabled" id="back"><a href=""><i class="material-icons">chevron_left</i></a></li>
+    <li class="" ng-repeat = " (key, value)  in temp.response" ><a  href="" ng-click="onPagination(key)">{{key+1}}</a></li>
+    <!-- <li class="waves-effect"><a href="#!">2</a></li>
+    <li class="waves-effect"><a href="#!">3</a></li>
+    <li class="waves-effect"><a href="#!">4</a></li>
+    <li class="waves-effect"><a href="#!">5</a></li> -->
+    <li class="waves-effect" id="forward"><a href=""><i class="material-icons">chevron_right</i></a></li>
+  </ul>
+  
+<!-- </div> -->
+
+<!-- </div> -->
+
+<!-- <div class="container striped section white" ng-show="total==0">
+  <h6 class="center" style="font-size: 30px;"><img src="../images/cartempty.png" height="150" width="150"><br>Sorry!<br>Your Cart is Empty!<br>Please Add Some Items From Our Menu.</h6><br><br> 
+
+</div> -->
+
+<!-- <a class="waves-effect waves-light btn modal-trigger" data-target="modal1">Modal</a> -->
+
+  <!-- Modal Structure -->
+  <!-- <div id="modal1" class="modal">
+    <div class="modal-content">
+      <h4>Modal Header</h4>
+      <p>A bunch of text</p>
+    </div>
+    <div class="modal-footer">
+        <a  class="modal-close waves-effect waves-green btn-flat">No</a>
+      <a  href="" ng-click="checkOut()" class="modal-close waves-effect waves-green btn-flat">Yes</a>
+    </div>
+  </div> -->

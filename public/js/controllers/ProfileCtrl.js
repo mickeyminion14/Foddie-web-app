@@ -1,4 +1,4 @@
-angular.module("ProfileCtrl",[]).controller("ProfileController", function ($rootScope, $scope, $localStorage){
+angular.module("ProfileCtrl",[]).controller("ProfileController", function ($rootScope, $scope, $localStorage, $location){
   
   $("#main").removeClass("home");
   $('#main').addClass("bgimg");
@@ -12,8 +12,6 @@ angular.module("ProfileCtrl",[]).controller("ProfileController", function ($root
   $rootScope.loggedIn;
   
   $scope.pastOrders = function () {
-    M.toast({
-      html: 'Item Added To Cart'
-    });
+  $location.path('/pastorders');
   };
 });
