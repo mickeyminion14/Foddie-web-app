@@ -2,9 +2,9 @@ var express = require('express');
 var router = express.Router();
 var fs = require('fs');
 var path = require('path');
+var bodyParser = require('body-parser');
 var mng = require('mongodb');
 var url = 'mongodb://sarthak:12345noni@ds121382.mlab.com:21382/foodie';
-var bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 
 router.use(bodyParser.urlencoded({
@@ -102,6 +102,40 @@ router.post("/createUser", function (req, res) {
   });
 });
 
+// router.post("/validateLogin", function (req, res) {
+//   console.log(req.body);
+
+//   mng.connect(url, {
+//     uri_decode_auth: true
+//   }, function (err, db) {
+
+//     if (err) throw err;
+
+//     var data = db.db("foodie");
+
+//     data.collection("lol").find({
+//       email: req.body.email
+//     }).toArray(function (err, result) {
+//       if (err) throw err;
+
+//       if (result.length > 0 && result[0].password == req.body.password) {
+//         console.log("record found");
+//         console.log(result[0]);
+//         result[0].ok = 1;
+//         res.send(result[0]);
+
+//       } else {
+//         console.log("not found");
+//         console.log(result);
+//         var result1 = {
+//           ok: 0
+//         };
+//         res.send(result1);
+//       }
+//     });
+//   });
+// });
+
 router.post("/validateLogin", function (req, res) {
   console.log(req.body);
 
@@ -134,7 +168,7 @@ router.post("/validateLogin", function (req, res) {
       }
     });
   });
-});
+})
 
 router.post("/processOrder", function (req, res) {
   console.log(req.body.user.email);
@@ -187,7 +221,14 @@ router.post("/pastorders", function (req, res) {
         });
       }
     });
+    
   });
+
+ 
+});
+
+router.post("/sendEmail", function (req, res) {
+console.log(req.body);
 
  
 });

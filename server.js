@@ -1,7 +1,11 @@
 var bodyparser = require('body-parser');
 var express = require ('express');
 var app = express();
+
 var routes = require('./app/routes')
+app.engine('html', require('ejs').renderFile);
+app.set('view engine', 'html');
+app.set('view engine', 'ejs');
 app.use('/', routes);
 var fs = require('fs');
 var path  = require ('path');

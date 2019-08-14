@@ -1,6 +1,72 @@
 <!-- <h1>{{temp.response}}</h1> -->
+<!-- when data is being recieved -->
 
-<div class="container striped section white"  style="padding: 50px; margin-top: 50px;" ng-show= "datarecieved==true">
+
+<div  style="margin-top: 100px;" class="row" ng-show= "!datarecieved">
+  <div class="col m1 l3 s1 offset-l1"></div> 
+  <div class="col  m10  l3 s10" style="margin-left: 4%">    
+        <div class="card ">
+      
+        <div class="card-content center black-text">
+          <!-- <span style="font-weight: 600; font-size: 40px;" class="card-title">Hi !</span> <br> -->
+          <!-- <img id="profile_image" class="responsive-img  circle " ng-src="/media/{{ User.email.split('@')[0] }}"  /> <br> <br> -->
+
+          <span style=" font-size: 30px; font-weight: 350" class="card-title">Fetching your past orders...</span> <br>
+          <span style=" font-size: 30px; font-weight: 350" class="card-title">Please wait...</span> <br>
+
+          <div class="preloader-wrapper big active">
+            <div class="spinner-layer spinner-blue">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+      
+            <div class="spinner-layer spinner-red">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+      
+            <div class="spinner-layer spinner-yellow">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+      
+            <div class="spinner-layer spinner-green">
+              <div class="circle-clipper left">
+                <div class="circle"></div>
+              </div><div class="gap-patch">
+                <div class="circle"></div>
+              </div><div class="circle-clipper right">
+                <div class="circle"></div>
+              </div>
+            </div>
+          </div>
+              
+          <br><br>  
+         
+        </div>
+      
+   
+      </div>
+    </div>
+  </div>
+          
+<!-- when data is recieved -->
+<div class="container striped section white"  style="padding: 50px; margin-top: 50px;" ng-show= "datarecieved">
   <h6 class="center" style="font-size: 30px;"><i class=" material-icons  center large">shopping_cart</i><br>Cart </h6><br><br> 
 <table class="responsive-table">
   <thead>

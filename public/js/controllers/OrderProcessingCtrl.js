@@ -14,14 +14,15 @@ angular.module("OrderProcessingCtrl",[]).controller("OrderProcessingController",
   $http.post('/processOrder', $scope.orderProcessingDetails)
   .success(function (data) {
     console.log(data);
-    if(data.added==true) {
+  
+    if(data.added == true) {
       // console.log("hello");
       $location.path('/profile');
       $rootScope.NavBarVisibilty = "true";
       $rootScope.MobileNavBarVisibilty = "true";  
       $rootScope.cartObj=[];
-      $localStorage.cartObj="";
-      $window.location.reload();
+      $localStorage.cartObj = "";
+      // $window.location.reload();
     }
   })
   .error(function (data) {

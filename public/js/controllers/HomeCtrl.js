@@ -1,5 +1,5 @@
 // app.controller("home", function ($rootScope, $scope, $location, $window, $localStorage) {
-  angular.module("HomeCtrl",[]).controller("HomeController", function ($rootScope, $scope, $location, $window, $localStorage){
+  angular.module("HomeCtrl",[]).controller("HomeController", function ($rootScope,$http, $scope, $location, $window, $localStorage){
   $("#main").removeClass("bgimg");
   $('#main').addClass("home");
   $rootScope.NavBarVisibilty = "true";
@@ -11,6 +11,7 @@
   
   $rootScope.total = $localStorage.total || 0;
   $rootScope.User;
+
 
   $scope.logout = function () {
 
@@ -27,6 +28,19 @@
     $location.path("/login");
 
   }
+
+  // $scope.sendEmail = function () {
+  //   // console.log("email function called");
+  //   console.log($rootScope.User);
+  //   $http.post('/sendEmail', $rootScope.User)
+  //       .success(function (data) {
+  //         console.log(data);
+  //         console.log(data.data1);
+  //       })
+  //       .error(function (data) {
+  //         console.log('Error: ' + data);
+  //       });
+  // }
 
 
 
