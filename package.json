@@ -24,7 +24,7 @@
     "ejs": "^2.6.1",
     "email-templates": "^5.0.3",
     "express": "^4.16.3",
-    "express-fileupload": "^0.4.0",
+    "express-fileupload": "^1.1.9",
     "mongod": "^2.0.0",
     "mongodb": "^3.1.6",
     "nodemailer": "^5.1.1"
